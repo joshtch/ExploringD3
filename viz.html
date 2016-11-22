@@ -51,14 +51,17 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="parse.js"></script>
 <script src="dndTree.js"></script>
+<script src="detailPanel.js"></script>
 
 <script>
-    
     var d3_json = jsonifyModules("dataset/d3/index.js", createTree);
-
 </script>
 
 <body>
     <div id="tree-container"></div>
+    <div id="detail-container">
+      <h1 id="dc-title"></h1>
+      <p><pre id="dc-code-text"></pre></p> 
+    </div>
 </body>
 </html>
