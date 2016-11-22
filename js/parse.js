@@ -32,7 +32,9 @@ function getModuleInfo(module) {
     var exports = []
 
     processMatches(export_regex, module_body, function(match) { 
-        exports.push(match[1]); 
+        var module_fun = new Object();
+        module_fun.name = match[1];
+        exports.push(module_fun); 
     });
 
     var module_info = new Object();
