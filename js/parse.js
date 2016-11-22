@@ -1,4 +1,4 @@
-function jsonifyModules(file, callback) {
+function jsonifyModules(file, callback, debug) {
 
     getFileText(file).then(function(fileText) {
        
@@ -14,6 +14,14 @@ function jsonifyModules(file, callback) {
 
         d3.name = "d3";
         d3.children = modules;
+        d3.type = "library";
+
+        if (debug) {
+            var url = 'data:text/json;charset=utf8,' + 
+                      encodeURIComponent(JSON.stringify(d3));
+            window.open(url, '_blank');
+            window.focus();
+        }
 
         callback(d3);
 
@@ -34,11 +42,13 @@ function getModuleInfo(module) {
     processMatches(export_regex, module_body, function(match) { 
         var module_fun = new Object();
         module_fun.name = match[1];
+        module_fun.type = "function";
         exports.push(module_fun); 
     });
 
     var module_info = new Object();
     module_info.name = module_name;
+    module_info.type = "module";
     module_info.children = exports;
 
     return module_info;

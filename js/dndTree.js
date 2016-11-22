@@ -25,8 +25,6 @@ OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
-
-
 // Get JSON data
 function createTree(treeData) {
 
@@ -153,11 +151,21 @@ function createTree(treeData) {
 
     // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
 
-    function centerNode(source) {
+    function centerClick(source) {
+
+        // find the children
+        children = source.children;
+        num_children = children.length;
+        middle_child = Math.floor(num_children / 2);
+
+        // center the middle child and also ensure that we fit
+        // all of the children
+        to_center = children[middle_child];
+
         scale = zoomListener.scale();
-        x = -source.y0;
-        y = -source.x0;
-        x = x * scale + viewerWidth / 2;
+        x = -to_center.y0;
+        y = -to_center.x0;
+        x = x * scale + (2 * viewerWidth) / 3;
         y = y * scale + viewerHeight / 2;
         d3.select('g').transition()
             .duration(duration)
@@ -182,12 +190,10 @@ function createTree(treeData) {
     // Toggle children on click.
 
     function click(d) {
-        if (d3.event.defaultPrevented) return; // click suppressed
         d = toggleChildren(d);
         update(d);
-        centerNode(d);
-        asdafasfasfgasgasgassafasgsafsafgasfasfdasdfsadfsdfsadfsadf
-        updateDetails(d);
+        centerClick(d);
+        // updateDetails(d);
     }
 
     function update(source) {
@@ -379,6 +385,14 @@ function createTree(treeData) {
 
     }
 
+    function collapseAllBut(node) {
+        if (node.children != undefined) {
+            for (var i = 0; i < node.children.length; ++i) {
+                collapseAll(node.children[i]);
+            }
+        }
+    }
+
     // Append a group which holds all nodes and which the zoom Listener can act upon.
     var svgGroup = baseSvg.append("g");
 
@@ -388,8 +402,19 @@ function createTree(treeData) {
     root.y0 = 0;
 
     // Layout the tree initially and center on the root node.
-    collapseAll(root);
+    collapseAllBut(root);
     update(root);
-    centerNode(root);
+    centerClick(root);
+
+    $("#reset-button").click(function() {
+        collapseAllBut(root);
+        update(root);
+        centerClick(root);
+    });
+
+    $(window).resize(function() {
+        $("svg").attr("height", $("#tree-container").height());
+        $("svg").attr("width", $("#tree-container").width());
+    });
 
 }

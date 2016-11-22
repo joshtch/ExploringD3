@@ -112,3 +112,20 @@ font-size:10px;
     z-index: 10;
     background-color: white;
 }
+
+#reset-button {
+    display: inline-block;
+    position: relative;
+    padding: 5px 10px;
+    margin-top: 20px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    font-size: 10px;
+    color: gray;
+    cursor: pointer;
+}
+
+#reset-button:hover {
+    color: #484848;
+    border-color: #484848;
+}

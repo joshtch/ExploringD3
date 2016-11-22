@@ -23,7 +23,7 @@
 <script>
 
     $(document).ready(function () {
-        jsonifyModules("dataset/d3/index.js", createTree);
+        jsonifyModules("dataset/d3/index.js", createTree, false);
     });
 
 </script>
@@ -31,7 +31,7 @@
 <body>
 
     <div id="tree-container">
-        
+
         <div id="caption">
             <h1>
                 Now it's your turn to explore D3!
@@ -57,6 +57,11 @@
             <h5>
                 Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
             </h5>
+
+            <div id="reset-button">
+                Reset Tree
+            </div>
+
         </div>
 
         <div id="detail-container">
