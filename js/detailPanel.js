@@ -1,0 +1,1 @@
+detailPanel.js
