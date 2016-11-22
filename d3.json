@@ -1,0 +1,1550 @@
+{
+  "name": "d3",
+  "children": [
+    {
+      "name": ".\/build\/package",
+      "type": "module",
+      "children": [
+        {
+          "name": "version\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-array",
+      "type": "module",
+      "children": [
+        {
+          "name": "bisect",
+          "type": "function"
+        },
+        {
+          "name": "bisectRight",
+          "type": "function"
+        },
+        {
+          "name": "bisectLeft",
+          "type": "function"
+        },
+        {
+          "name": "ascending",
+          "type": "function"
+        },
+        {
+          "name": "bisector",
+          "type": "function"
+        },
+        {
+          "name": "descending",
+          "type": "function"
+        },
+        {
+          "name": "deviation",
+          "type": "function"
+        },
+        {
+          "name": "extent",
+          "type": "function"
+        },
+        {
+          "name": "histogram",
+          "type": "function"
+        },
+        {
+          "name": "thresholdFreedmanDiaconis",
+          "type": "function"
+        },
+        {
+          "name": "thresholdScott",
+          "type": "function"
+        },
+        {
+          "name": "thresholdSturges",
+          "type": "function"
+        },
+        {
+          "name": "max",
+          "type": "function"
+        },
+        {
+          "name": "mean",
+          "type": "function"
+        },
+        {
+          "name": "median",
+          "type": "function"
+        },
+        {
+          "name": "merge",
+          "type": "function"
+        },
+        {
+          "name": "min",
+          "type": "function"
+        },
+        {
+          "name": "pairs",
+          "type": "function"
+        },
+        {
+          "name": "permute",
+          "type": "function"
+        },
+        {
+          "name": "quantile",
+          "type": "function"
+        },
+        {
+          "name": "range",
+          "type": "function"
+        },
+        {
+          "name": "scan",
+          "type": "function"
+        },
+        {
+          "name": "shuffle",
+          "type": "function"
+        },
+        {
+          "name": "sum",
+          "type": "function"
+        },
+        {
+          "name": "ticks",
+          "type": "function"
+        },
+        {
+          "name": "tickStep",
+          "type": "function"
+        },
+        {
+          "name": "transpose",
+          "type": "function"
+        },
+        {
+          "name": "variance",
+          "type": "function"
+        },
+        {
+          "name": "zip\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-collection",
+      "type": "module",
+      "children": [
+        {
+          "name": "entries",
+          "type": "function"
+        },
+        {
+          "name": "keys",
+          "type": "function"
+        },
+        {
+          "name": "values",
+          "type": "function"
+        },
+        {
+          "name": "map",
+          "type": "function"
+        },
+        {
+          "name": "set",
+          "type": "function"
+        },
+        {
+          "name": "nest\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-random",
+      "type": "module",
+      "children": [
+        {
+          "name": "randomUniform",
+          "type": "function"
+        },
+        {
+          "name": "randomNormal",
+          "type": "function"
+        },
+        {
+          "name": "randomLogNormal",
+          "type": "function"
+        },
+        {
+          "name": "randomBates",
+          "type": "function"
+        },
+        {
+          "name": "randomIrwinHall",
+          "type": "function"
+        },
+        {
+          "name": "randomExponential\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-ease",
+      "type": "module",
+      "children": [
+        {
+          "name": "easeLinear",
+          "type": "function"
+        },
+        {
+          "name": "easeQuad",
+          "type": "function"
+        },
+        {
+          "name": "easeQuadIn",
+          "type": "function"
+        },
+        {
+          "name": "easeQuadOut",
+          "type": "function"
+        },
+        {
+          "name": "easeQuadInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeCubic",
+          "type": "function"
+        },
+        {
+          "name": "easeCubicIn",
+          "type": "function"
+        },
+        {
+          "name": "easeCubicOut",
+          "type": "function"
+        },
+        {
+          "name": "easeCubicInOut",
+          "type": "function"
+        },
+        {
+          "name": "easePoly",
+          "type": "function"
+        },
+        {
+          "name": "easePolyIn",
+          "type": "function"
+        },
+        {
+          "name": "easePolyOut",
+          "type": "function"
+        },
+        {
+          "name": "easePolyInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeSin",
+          "type": "function"
+        },
+        {
+          "name": "easeSinIn",
+          "type": "function"
+        },
+        {
+          "name": "easeSinOut",
+          "type": "function"
+        },
+        {
+          "name": "easeSinInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeExp",
+          "type": "function"
+        },
+        {
+          "name": "easeExpIn",
+          "type": "function"
+        },
+        {
+          "name": "easeExpOut",
+          "type": "function"
+        },
+        {
+          "name": "easeExpInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeCircle",
+          "type": "function"
+        },
+        {
+          "name": "easeCircleIn",
+          "type": "function"
+        },
+        {
+          "name": "easeCircleOut",
+          "type": "function"
+        },
+        {
+          "name": "easeCircleInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeBounce",
+          "type": "function"
+        },
+        {
+          "name": "easeBounceIn",
+          "type": "function"
+        },
+        {
+          "name": "easeBounceOut",
+          "type": "function"
+        },
+        {
+          "name": "easeBounceInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeBack",
+          "type": "function"
+        },
+        {
+          "name": "easeBackIn",
+          "type": "function"
+        },
+        {
+          "name": "easeBackOut",
+          "type": "function"
+        },
+        {
+          "name": "easeBackInOut",
+          "type": "function"
+        },
+        {
+          "name": "easeElastic",
+          "type": "function"
+        },
+        {
+          "name": "easeElasticIn",
+          "type": "function"
+        },
+        {
+          "name": "easeElasticOut",
+          "type": "function"
+        },
+        {
+          "name": "easeElasticInOut\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-polygon",
+      "type": "module",
+      "children": [
+        {
+          "name": "polygonArea",
+          "type": "function"
+        },
+        {
+          "name": "polygonCentroid",
+          "type": "function"
+        },
+        {
+          "name": "polygonHull",
+          "type": "function"
+        },
+        {
+          "name": "polygonContains",
+          "type": "function"
+        },
+        {
+          "name": "polygonLength\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-path",
+      "type": "module",
+      "children": [
+        {
+          "name": "path\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-quadtree",
+      "type": "module",
+      "children": [
+        {
+          "name": "quadtree\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-queue",
+      "type": "module",
+      "children": [
+        {
+          "name": "queue\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-color",
+      "type": "module",
+      "children": [
+        {
+          "name": "color",
+          "type": "function"
+        },
+        {
+          "name": "rgb",
+          "type": "function"
+        },
+        {
+          "name": "hsl",
+          "type": "function"
+        },
+        {
+          "name": "lab",
+          "type": "function"
+        },
+        {
+          "name": "hcl",
+          "type": "function"
+        },
+        {
+          "name": "cubehelix\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-interpolate",
+      "type": "module",
+      "children": [
+        {
+          "name": "interpolate",
+          "type": "function"
+        },
+        {
+          "name": "interpolateArray",
+          "type": "function"
+        },
+        {
+          "name": "interpolateDate",
+          "type": "function"
+        },
+        {
+          "name": "interpolateNumber",
+          "type": "function"
+        },
+        {
+          "name": "interpolateObject",
+          "type": "function"
+        },
+        {
+          "name": "interpolateRound",
+          "type": "function"
+        },
+        {
+          "name": "interpolateString",
+          "type": "function"
+        },
+        {
+          "name": "interpolateTransformCss",
+          "type": "function"
+        },
+        {
+          "name": "interpolateTransformSvg",
+          "type": "function"
+        },
+        {
+          "name": "interpolateZoom",
+          "type": "function"
+        },
+        {
+          "name": "interpolateRgb",
+          "type": "function"
+        },
+        {
+          "name": "interpolateRgbBasis",
+          "type": "function"
+        },
+        {
+          "name": "interpolateRgbBasisClosed",
+          "type": "function"
+        },
+        {
+          "name": "interpolateHsl",
+          "type": "function"
+        },
+        {
+          "name": "interpolateHslLong",
+          "type": "function"
+        },
+        {
+          "name": "interpolateLab",
+          "type": "function"
+        },
+        {
+          "name": "interpolateHcl",
+          "type": "function"
+        },
+        {
+          "name": "interpolateHclLong",
+          "type": "function"
+        },
+        {
+          "name": "interpolateCubehelix",
+          "type": "function"
+        },
+        {
+          "name": "interpolateCubehelixLong",
+          "type": "function"
+        },
+        {
+          "name": "interpolateBasis",
+          "type": "function"
+        },
+        {
+          "name": "interpolateBasisClosed",
+          "type": "function"
+        },
+        {
+          "name": "quantize\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-dispatch",
+      "type": "module",
+      "children": [
+        {
+          "name": "dispatch\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-dsv",
+      "type": "module",
+      "children": [
+        {
+          "name": "dsvFormat",
+          "type": "function"
+        },
+        {
+          "name": "csvParse",
+          "type": "function"
+        },
+        {
+          "name": "csvParseRows",
+          "type": "function"
+        },
+        {
+          "name": "csvFormat",
+          "type": "function"
+        },
+        {
+          "name": "csvFormatRows",
+          "type": "function"
+        },
+        {
+          "name": "tsvParse",
+          "type": "function"
+        },
+        {
+          "name": "tsvParseRows",
+          "type": "function"
+        },
+        {
+          "name": "tsvFormat",
+          "type": "function"
+        },
+        {
+          "name": "tsvFormatRows\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-request",
+      "type": "module",
+      "children": [
+        {
+          "name": "request",
+          "type": "function"
+        },
+        {
+          "name": "html",
+          "type": "function"
+        },
+        {
+          "name": "json",
+          "type": "function"
+        },
+        {
+          "name": "text",
+          "type": "function"
+        },
+        {
+          "name": "xml",
+          "type": "function"
+        },
+        {
+          "name": "csv",
+          "type": "function"
+        },
+        {
+          "name": "tsv\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-timer",
+      "type": "module",
+      "children": [
+        {
+          "name": "now",
+          "type": "function"
+        },
+        {
+          "name": "timer",
+          "type": "function"
+        },
+        {
+          "name": "timerFlush",
+          "type": "function"
+        },
+        {
+          "name": "timeout",
+          "type": "function"
+        },
+        {
+          "name": "interval\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-time",
+      "type": "module",
+      "children": [
+        {
+          "name": "timeInterval",
+          "type": "function"
+        },
+        {
+          "name": "timeMillisecond",
+          "type": "function"
+        },
+        {
+          "name": "timeMilliseconds",
+          "type": "function"
+        },
+        {
+          "name": "timeSecond",
+          "type": "function"
+        },
+        {
+          "name": "timeSeconds",
+          "type": "function"
+        },
+        {
+          "name": "timeMinute",
+          "type": "function"
+        },
+        {
+          "name": "timeMinutes",
+          "type": "function"
+        },
+        {
+          "name": "timeHour",
+          "type": "function"
+        },
+        {
+          "name": "timeHours",
+          "type": "function"
+        },
+        {
+          "name": "timeDay",
+          "type": "function"
+        },
+        {
+          "name": "timeDays",
+          "type": "function"
+        },
+        {
+          "name": "timeWeek",
+          "type": "function"
+        },
+        {
+          "name": "timeWeeks",
+          "type": "function"
+        },
+        {
+          "name": "timeSunday",
+          "type": "function"
+        },
+        {
+          "name": "timeSundays",
+          "type": "function"
+        },
+        {
+          "name": "timeMonday",
+          "type": "function"
+        },
+        {
+          "name": "timeMondays",
+          "type": "function"
+        },
+        {
+          "name": "timeTuesday",
+          "type": "function"
+        },
+        {
+          "name": "timeTuesdays",
+          "type": "function"
+        },
+        {
+          "name": "timeWednesday",
+          "type": "function"
+        },
+        {
+          "name": "timeWednesdays",
+          "type": "function"
+        },
+        {
+          "name": "timeThursday",
+          "type": "function"
+        },
+        {
+          "name": "timeThursdays",
+          "type": "function"
+        },
+        {
+          "name": "timeFriday",
+          "type": "function"
+        },
+        {
+          "name": "timeFridays",
+          "type": "function"
+        },
+        {
+          "name": "timeSaturday",
+          "type": "function"
+        },
+        {
+          "name": "timeSaturdays",
+          "type": "function"
+        },
+        {
+          "name": "timeMonth",
+          "type": "function"
+        },
+        {
+          "name": "timeMonths",
+          "type": "function"
+        },
+        {
+          "name": "timeYear",
+          "type": "function"
+        },
+        {
+          "name": "timeYears",
+          "type": "function"
+        },
+        {
+          "name": "utcMillisecond",
+          "type": "function"
+        },
+        {
+          "name": "utcMilliseconds",
+          "type": "function"
+        },
+        {
+          "name": "utcSecond",
+          "type": "function"
+        },
+        {
+          "name": "utcSeconds",
+          "type": "function"
+        },
+        {
+          "name": "utcMinute",
+          "type": "function"
+        },
+        {
+          "name": "utcMinutes",
+          "type": "function"
+        },
+        {
+          "name": "utcHour",
+          "type": "function"
+        },
+        {
+          "name": "utcHours",
+          "type": "function"
+        },
+        {
+          "name": "utcDay",
+          "type": "function"
+        },
+        {
+          "name": "utcDays",
+          "type": "function"
+        },
+        {
+          "name": "utcWeek",
+          "type": "function"
+        },
+        {
+          "name": "utcWeeks",
+          "type": "function"
+        },
+        {
+          "name": "utcSunday",
+          "type": "function"
+        },
+        {
+          "name": "utcSundays",
+          "type": "function"
+        },
+        {
+          "name": "utcMonday",
+          "type": "function"
+        },
+        {
+          "name": "utcMondays",
+          "type": "function"
+        },
+        {
+          "name": "utcTuesday",
+          "type": "function"
+        },
+        {
+          "name": "utcTuesdays",
+          "type": "function"
+        },
+        {
+          "name": "utcWednesday",
+          "type": "function"
+        },
+        {
+          "name": "utcWednesdays",
+          "type": "function"
+        },
+        {
+          "name": "utcThursday",
+          "type": "function"
+        },
+        {
+          "name": "utcThursdays",
+          "type": "function"
+        },
+        {
+          "name": "utcFriday",
+          "type": "function"
+        },
+        {
+          "name": "utcFridays",
+          "type": "function"
+        },
+        {
+          "name": "utcSaturday",
+          "type": "function"
+        },
+        {
+          "name": "utcSaturdays",
+          "type": "function"
+        },
+        {
+          "name": "utcMonth",
+          "type": "function"
+        },
+        {
+          "name": "utcMonths",
+          "type": "function"
+        },
+        {
+          "name": "utcYear",
+          "type": "function"
+        },
+        {
+          "name": "utcYears\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-format",
+      "type": "module",
+      "children": [
+        {
+          "name": "format",
+          "type": "function"
+        },
+        {
+          "name": "formatPrefix",
+          "type": "function"
+        },
+        {
+          "name": "formatLocale",
+          "type": "function"
+        },
+        {
+          "name": "formatDefaultLocale",
+          "type": "function"
+        },
+        {
+          "name": "formatSpecifier",
+          "type": "function"
+        },
+        {
+          "name": "precisionFixed",
+          "type": "function"
+        },
+        {
+          "name": "precisionPrefix",
+          "type": "function"
+        },
+        {
+          "name": "precisionRound\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-time-format",
+      "type": "module",
+      "children": [
+        {
+          "name": "timeFormat",
+          "type": "function"
+        },
+        {
+          "name": "timeParse",
+          "type": "function"
+        },
+        {
+          "name": "utcFormat",
+          "type": "function"
+        },
+        {
+          "name": "utcParse",
+          "type": "function"
+        },
+        {
+          "name": "isoFormat",
+          "type": "function"
+        },
+        {
+          "name": "isoParse",
+          "type": "function"
+        },
+        {
+          "name": "timeFormatLocale",
+          "type": "function"
+        },
+        {
+          "name": "timeFormatDefaultLocale\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-scale",
+      "type": "module",
+      "children": [
+        {
+          "name": "scaleBand",
+          "type": "function"
+        },
+        {
+          "name": "scalePoint",
+          "type": "function"
+        },
+        {
+          "name": "scaleIdentity",
+          "type": "function"
+        },
+        {
+          "name": "scaleLinear",
+          "type": "function"
+        },
+        {
+          "name": "scaleLog",
+          "type": "function"
+        },
+        {
+          "name": "scaleOrdinal",
+          "type": "function"
+        },
+        {
+          "name": "scaleImplicit",
+          "type": "function"
+        },
+        {
+          "name": "scalePow",
+          "type": "function"
+        },
+        {
+          "name": "scaleSqrt",
+          "type": "function"
+        },
+        {
+          "name": "scaleQuantile",
+          "type": "function"
+        },
+        {
+          "name": "scaleQuantize",
+          "type": "function"
+        },
+        {
+          "name": "scaleThreshold",
+          "type": "function"
+        },
+        {
+          "name": "scaleTime",
+          "type": "function"
+        },
+        {
+          "name": "scaleUtc",
+          "type": "function"
+        },
+        {
+          "name": "schemeCategory10",
+          "type": "function"
+        },
+        {
+          "name": "schemeCategory20b",
+          "type": "function"
+        },
+        {
+          "name": "schemeCategory20c",
+          "type": "function"
+        },
+        {
+          "name": "schemeCategory20",
+          "type": "function"
+        },
+        {
+          "name": "scaleSequential",
+          "type": "function"
+        },
+        {
+          "name": "interpolateCubehelixDefault",
+          "type": "function"
+        },
+        {
+          "name": "interpolateRainbow",
+          "type": "function"
+        },
+        {
+          "name": "interpolateWarm",
+          "type": "function"
+        },
+        {
+          "name": "interpolateCool",
+          "type": "function"
+        },
+        {
+          "name": "interpolateViridis",
+          "type": "function"
+        },
+        {
+          "name": "interpolateMagma",
+          "type": "function"
+        },
+        {
+          "name": "interpolateInferno",
+          "type": "function"
+        },
+        {
+          "name": "interpolatePlasma\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-selection",
+      "type": "module",
+      "children": [
+        {
+          "name": "creator",
+          "type": "function"
+        },
+        {
+          "name": "customEvent",
+          "type": "function"
+        },
+        {
+          "name": "event",
+          "type": "function"
+        },
+        {
+          "name": "local",
+          "type": "function"
+        },
+        {
+          "name": "matcher",
+          "type": "function"
+        },
+        {
+          "name": "mouse",
+          "type": "function"
+        },
+        {
+          "name": "namespace",
+          "type": "function"
+        },
+        {
+          "name": "namespaces",
+          "type": "function"
+        },
+        {
+          "name": "select",
+          "type": "function"
+        },
+        {
+          "name": "selectAll",
+          "type": "function"
+        },
+        {
+          "name": "selection",
+          "type": "function"
+        },
+        {
+          "name": "selector",
+          "type": "function"
+        },
+        {
+          "name": "selectorAll",
+          "type": "function"
+        },
+        {
+          "name": "touch",
+          "type": "function"
+        },
+        {
+          "name": "touches",
+          "type": "function"
+        },
+        {
+          "name": "window\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-transition",
+      "type": "module",
+      "children": [
+        {
+          "name": "active",
+          "type": "function"
+        },
+        {
+          "name": "interrupt",
+          "type": "function"
+        },
+        {
+          "name": "transition\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-axis",
+      "type": "module",
+      "children": [
+        {
+          "name": "axisTop",
+          "type": "function"
+        },
+        {
+          "name": "axisRight",
+          "type": "function"
+        },
+        {
+          "name": "axisBottom",
+          "type": "function"
+        },
+        {
+          "name": "axisLeft\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-hierarchy",
+      "type": "module",
+      "children": [
+        {
+          "name": "cluster",
+          "type": "function"
+        },
+        {
+          "name": "hierarchy",
+          "type": "function"
+        },
+        {
+          "name": "pack",
+          "type": "function"
+        },
+        {
+          "name": "packSiblings",
+          "type": "function"
+        },
+        {
+          "name": "packEnclose",
+          "type": "function"
+        },
+        {
+          "name": "partition",
+          "type": "function"
+        },
+        {
+          "name": "stratify",
+          "type": "function"
+        },
+        {
+          "name": "tree",
+          "type": "function"
+        },
+        {
+          "name": "treemap",
+          "type": "function"
+        },
+        {
+          "name": "treemapBinary",
+          "type": "function"
+        },
+        {
+          "name": "treemapDice",
+          "type": "function"
+        },
+        {
+          "name": "treemapSlice",
+          "type": "function"
+        },
+        {
+          "name": "treemapSliceDice",
+          "type": "function"
+        },
+        {
+          "name": "treemapSquarify",
+          "type": "function"
+        },
+        {
+          "name": "treemapResquarify\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-force",
+      "type": "module",
+      "children": [
+        {
+          "name": "forceCenter",
+          "type": "function"
+        },
+        {
+          "name": "forceCollide",
+          "type": "function"
+        },
+        {
+          "name": "forceLink",
+          "type": "function"
+        },
+        {
+          "name": "forceManyBody",
+          "type": "function"
+        },
+        {
+          "name": "forceSimulation",
+          "type": "function"
+        },
+        {
+          "name": "forceX",
+          "type": "function"
+        },
+        {
+          "name": "forceY\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-drag",
+      "type": "module",
+      "children": [
+        {
+          "name": "drag",
+          "type": "function"
+        },
+        {
+          "name": "dragDisable",
+          "type": "function"
+        },
+        {
+          "name": "dragEnable\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-voronoi",
+      "type": "module",
+      "children": [
+        {
+          "name": "voronoi\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-zoom",
+      "type": "module",
+      "children": [
+        {
+          "name": "zoom",
+          "type": "function"
+        },
+        {
+          "name": "zoomIdentity",
+          "type": "function"
+        },
+        {
+          "name": "zoomTransform\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-brush",
+      "type": "module",
+      "children": [
+        {
+          "name": "brush",
+          "type": "function"
+        },
+        {
+          "name": "brushX",
+          "type": "function"
+        },
+        {
+          "name": "brushY",
+          "type": "function"
+        },
+        {
+          "name": "brushSelection\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-chord",
+      "type": "module",
+      "children": [
+        {
+          "name": "chord",
+          "type": "function"
+        },
+        {
+          "name": "ribbon\n",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "d3-geo",
+      "type": "module",
+      "children": [
+        {
+          "name": "geoAlbers",
+          "type": "function"
+        },
+        {
+          "name": "geoAlbersUsa",
+          "type": "function"
+        },
+        {
+          "name": "geoArea",
+          "type": "function"
+        },
+        {
+          "name": "geoAzimuthalEqualArea",
+          "type": "function"
+        },
+        {
+          "name": "geoAzimuthalEqualAreaRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoAzimuthalEquidistant",
+          "type": "function"
+        },
+        {
+          "name": "geoAzimuthalEquidistantRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoBounds",
+          "type": "function"
+        },
+        {
+          "name": "geoCentroid",
+          "type": "function"
+        },
+        {
+          "name": "geoCircle",
+          "type": "function"
+        },
+        {
+          "name": "geoClipExtent",
+          "type": "function"
+        },
+        {
+          "name": "\/\/ DEPRECATED! Use geoIdentity.clipExtent instead.\n  geoConicConformal",
+          "type": "function"
+        },
+        {
+          "name": "geoConicConformalRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoConicEqualArea",
+          "type": "function"
+        },
+        {
+          "name": "geoConicEqualAreaRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoConicEquidistant",
+          "type": "function"
+        },
+        {
+          "name": "geoConicEquidistantRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoDistance",
+          "type": "function"
+        },
+        {
+          "name": "geoEquirectangular",
+          "type": "function"
+        },
+        {
+          "name": "geoEquirectangularRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoGnomonic",
+          "type": "function"
+        },
+        {
+          "name": "geoGnomonicRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoGraticule",
+          "type": "function"
+        },
+        {
+          "name": "geoGraticule10",
+          "type": "function"
+        },
+        {
+          "name": "geoIdentity",
+          "type": "function"
+        },
+        {
+          "name": "geoInterpolate",
+          "type": "function"
+        },
+        {
+          "name": "geoLength",
+          "type": "function"
+        },
+        {
+          "name": "geoMercator",
+          "type": "function"
+        },
+        {
+          "name": "geoMercatorRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoOrthographic",
+          "type": "function"
+        },
+        {
+          "name": "geoOrthographicRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoPath",
+          "type": "function"
+        },
+        {
+          "name": "geoProjection",
+          "type": "function"
+        },
+        {
+          "name": "geoProjectionMutator",
+          "type": "function"
+        },
+        {
+          "name": "geoRotation",
+          "type": "function"
+        },
+        {
+          "name": "geoStereographic",
+          "type": "function"
+        },
+        {
+          "name": "geoStereographicRaw",
+          "type": "function"
+        },
+        {
+          "name": "geoStream",
+          "type": "function"
+        },
+        {
+          "name": "geoTransform",
+          "type": "function"
+        },
+        {
+          "name": "geoTransverseMercator",
+          "type": "function"
+        },
+        {
+          "name": "geoTransverseMercatorRaw\n",
+          "type": "function"
+        }
+      ]
+    }
+  ],
+  "type": "library"
+}
