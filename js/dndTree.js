@@ -192,8 +192,8 @@ function createTree(treeData) {
     function click(d) {
         d = toggleChildren(d);
         update(d);
-        centerClick(d);
-        // updateDetails(d);
+        centerNode(d);
+        updateDetails(d);
     }
 
     function update(source) {
