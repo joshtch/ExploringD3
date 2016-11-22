@@ -45,8 +45,8 @@ function createTree(treeData) {
     var root;
 
     // size of the diagram
-    var viewerWidth = $(document).width();
-    var viewerHeight = $(document).height();
+    var viewerWidth = $("#tree-container").width();
+    var viewerHeight = $("#tree-container").height();
 
     var tree = d3.layout.tree()
         .size([viewerHeight, viewerWidth]);
@@ -186,6 +186,8 @@ function createTree(treeData) {
         d = toggleChildren(d);
         update(d);
         centerNode(d);
+        asdafasfasfgasgasgassafasgsafsafgasfasfdasdfsadfsdfsadfsadf
+        updateDetails(d);
     }
 
     function update(source) {

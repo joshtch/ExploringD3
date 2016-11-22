@@ -1,89 +1,114 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
-  background: url(texture-noise.png);
-  overflow: hidden;
-  margin: 0;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica;
+    margin: 0px;
+    font-family:sans-serif;
+    height: 100%;
 }
 
-#chart, #header, #footer {
-  position: absolute;
-  top: 0;
+#tree-container {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
 }
 
-#header, #footer {
-  z-index: 1;
-  display: block;
-  font-size: 36px;
-  font-weight: 300;
-  text-shadow: 0 1px 0 #fff;
+#caption {
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    width: 20%;
+    z-index: 10;
+    background-color: #EEE;
+    padding: 10px 20px;
 }
 
-#header.inverted, #footer.inverted {
-  color: #fff;
-  text-shadow: 0 1px 4px #000;
+#caption h1 {
+    font-size: 20px;
+    font-weight: 400;
 }
 
-#header {
-  top: 80px;
-  left: 140px;
-  width: 1000px;
+#caption h3 {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 0px 0;
+    color: gray;
 }
 
-#footer {
-  top: 680px;
-  right: 140px;
-  text-align: right;
+#caption h5,
+#caption #key h1 {
+    font-size: 12px;
+    font-weight: 300;
+    color: gray;
+    text-transform: none;
+    margin: 0;
 }
 
-rect {
-  fill: none;
-  pointer-events: all;
+#caption a {
+    color: gray;
 }
 
-pre {
-  font-size: 18px;
+#caption #key {
+    display: flex;
+    margin: 20px 0px;
 }
 
-line {
-  stroke: #000;
-  stroke-width: 1.5px;
+#caption #key h1 {
+    flex: 1;
 }
 
-.string, .regexp {
-  color: #f39;
+#caption #key svg {
+    margin-right: 10px;
 }
 
-.keyword {
-  color: #00c;
+#caption #key div {
+    flex: 2;
+    float: right;
+    font-size: 12px;
+    font-weight: 300;
+    color: gray;
 }
 
-.comment {
-  color: #777;
-  font-style: oblique;
+.node {
+cursor: pointer;
 }
 
-.number {
-  color: #369;
+.overlay{
+  background-color:#EEE;
 }
 
-.class, .special {
-  color: #1181B8;
+.node text {
+font-size:10px; 
 }
 
-a:link, a:visited {
-  color: #000;
-  text-decoration: none;
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
 }
 
-a:hover {
-  color: #666;
+.templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
 }
 
-.hint {
-  position: absolute;
-  right: 0;
-  width: 1280px;
-  font-size: 12px;
-  color: #999;
+.ghostCircle.show{
+    display:block;
+}
+
+.ghostCircle, .activeDrag .ghostCircle{
+    display: none;
+}
+
+#detail-container {
+    overflow-y: scroll;
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    right: 0%;
+    z-index: 10;
+    background-color: white;
 }

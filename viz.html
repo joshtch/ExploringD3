@@ -1,118 +1,37 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style type="text/css">
-  
-    body {
-        margin: 0px;
-        font-family:sans-serif;
-    }
-
-    #tree-container {
-        height: 100%;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    #caption {
-        position: absolute;
-        bottom: 8%;
-        right: 5%;
-        width: 20%;
-        z-index: 10;
-        background-color: #EEE;
-        padding: 10px 20px;
-    }
-
-    #caption h1 {
-        font-size: 20px;
-        font-weight: 400;
-    }
-
-    #caption h3 {
-        font-size: 14px;
-        font-weight: 300;
-        margin: 0 0 0px 0;
-        color: gray;
-    }
-
-    #caption h5,
-    #caption #key h1 {
-        font-size: 12px;
-        font-weight: 300;
-        color: gray;
-        text-transform: none;
-        margin: 0;
-    }
-
-    #caption a {
-        color: gray;
-    }
-
-    #caption #key {
-        display: flex;
-        margin: 20px 0px;
-    }
-
-    #caption #key h1 {
-        flex: 1;
-    }
-
-    #caption #key svg {
-        margin-right: 10px;
-    }
-
-    #caption #key div {
-        flex: 2;
-        float: right;
-        font-size: 12px;
-        font-weight: 300;
-        color: gray;
-    }
-
-  .node {
-    cursor: pointer;
-  }
-
-  .overlay{
-      background-color:#EEE;
-  }
-   
-  .node text {
-    font-size:10px; 
-  }
-   
-  .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
-  }
-
-  .templink {
-    fill: none;
-    stroke: red;
-    stroke-width: 3px;
-  }
-
-  .ghostCircle.show{
-      display:block;
-  }
-
-  .ghostCircle, .activeDrag .ghostCircle{
-       display: none;
-  }
-
-</style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<!-- bootstrap  -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="css/style.css">
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
+
 <script src="js/parse.js"></script>
+<script src="js/detailPanel.js"></script>
 <script src="js/dndTree.js"></script>
 
 <script>
-    jsonifyModules("dataset/d3/index.js", createTree);
+
+    $(document).ready(function () {
+        jsonifyModules("dataset/d3/index.js", createTree);
+    });
+
 </script>
 
 <body>
+
     <div id="tree-container">
+        
         <div id="caption">
             <h1>
                 Now it's your turn to explore D3!
@@ -139,6 +58,13 @@
                 Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
             </h5>
         </div>
+
+        <div id="detail-container">
+            <h1 id="dc-title"></h1>
+            <p><pre id="dc-code-text"></pre></p> 
+        </div>
+
     </div>
+
 </body>
 </html>
