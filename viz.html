@@ -41,23 +41,27 @@
        display: none;
   }
 
+  #detail-container {
+    overflow-y: scroll;
+  }
+
 </style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <script src="js/parse.js"></script>
-<script src="js/dndTree.js"></script>
 <script src="js/detailPanel.js"></script>
+<script src="js/dndTree.js"></script>
 
 <script>
     jsonifyModules("dataset/d3/index.js", createTree)
 </script>
 
 <body>
-    <div id="tree-container"></div>
     <div id="detail-container">
       <h1 id="dc-title"></h1>
       <p><pre id="dc-code-text"></pre></p> 
     </div>
+    <div id="tree-container"></div>
 </body>
 </html>

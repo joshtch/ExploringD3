@@ -186,6 +186,7 @@ function createTree(treeData) {
         d = toggleChildren(d);
         update(d);
         centerNode(d);
+        updateDetails(d);
     }
 
     function update(source) {
