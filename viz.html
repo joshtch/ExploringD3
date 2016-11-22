@@ -2,7 +2,74 @@
 <meta charset="utf-8">
 <style type="text/css">
   
-    .node {
+    body {
+        margin: 0px;
+        font-family:sans-serif;
+    }
+
+    #tree-container {
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #caption {
+        position: absolute;
+        bottom: 8%;
+        right: 5%;
+        width: 20%;
+        z-index: 10;
+        background-color: #EEE;
+        padding: 10px 20px;
+    }
+
+    #caption h1 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    #caption h3 {
+        font-size: 14px;
+        font-weight: 300;
+        margin: 0 0 0px 0;
+        color: gray;
+    }
+
+    #caption h5,
+    #caption #key h1 {
+        font-size: 12px;
+        font-weight: 300;
+        color: gray;
+        text-transform: none;
+        margin: 0;
+    }
+
+    #caption a {
+        color: gray;
+    }
+
+    #caption #key {
+        display: flex;
+        margin: 20px 0px;
+    }
+
+    #caption #key h1 {
+        flex: 1;
+    }
+
+    #caption #key svg {
+        margin-right: 10px;
+    }
+
+    #caption #key div {
+        flex: 2;
+        float: right;
+        font-size: 12px;
+        font-weight: 300;
+        color: gray;
+    }
+
+  .node {
     cursor: pointer;
   }
 
@@ -10,15 +77,8 @@
       background-color:#EEE;
   }
    
-  .node circle {
-    fill: #fff;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-  }
-   
   .node text {
     font-size:10px; 
-    font-family:sans-serif;
   }
    
   .link {
@@ -48,10 +108,37 @@
 <script src="js/dndTree.js"></script>
 
 <script>
-    jsonifyModules("dataset/d3/index.js", createTree)
+    jsonifyModules("dataset/d3/index.js", createTree);
 </script>
 
 <body>
-    <div id="tree-container"></div>
+    <div id="tree-container">
+        <div id="caption">
+            <h1>
+                Now it's your turn to explore D3!
+            </h1>
+            <h3>
+                <p>Just click and drag to move the visualization. To expand or shrink a node just click it. To zoom in on the visualization, scroll up; to zoom out, scroll down. Have fun!</p>
+            </h3>
+            <div id="key">
+                <h1>
+                    Key:
+                </h1>
+                <div>
+                    <svg width="9" height="9">
+                        <circle cx="4.5" cy="4.5" r="4.5" style="fill: #7f9b66;"></circle>
+                    </svg> D3 Module
+                </div>
+                <div>
+                    <svg width="9" height="9">
+                        <circle cx="4.5" cy="4.5" r="4.5" style="fill: #A6D785;"></circle>
+                    </svg> D3 Function
+                </div>
+            </div>
+            <h5>
+                Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
+            </h5>
+        </div>
+    </div>
 </body>
 </html>

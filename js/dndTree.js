@@ -238,7 +238,7 @@ function createTree(treeData) {
             .attr('class', 'nodeCircle')
             .attr("r", 0)
             .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ? "#7f9b66" : d._children ? "#7f9b66" : "#A6D785";
             });
 
         nodeEnter.append("text")
@@ -285,7 +285,7 @@ function createTree(treeData) {
         node.select("circle.nodeCircle")
             .attr("r", 4.5)
             .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ? "#7f9b66" : d.children ? "#7f9b66" : "#A6D785";
             });
 
         // Transition nodes to their new position.
