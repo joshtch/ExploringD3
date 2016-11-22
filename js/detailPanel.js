@@ -6,6 +6,8 @@ var txt = "";
 	var DESC = "#dc-description";
 
 	function updateDetails (d) {
+
+		$("#detail-container").css("visibility", "visible");
 		
 		var name = d.name;
 		$(TITLE).text(name);
