@@ -213,7 +213,7 @@ function createTree(treeData) {
             }
         };
         childCount(0, root);
-        var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line  
+        var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line
         tree = tree.size([newHeight, viewerWidth]);
 
         // Compute the new tree layout.
@@ -369,7 +369,7 @@ function createTree(treeData) {
     }
 
     function collapseAll(node) {
-        
+
         if (node.children) {
             node._children = node.children;
             node.children = null;

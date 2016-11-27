@@ -80,7 +80,7 @@ cursor: pointer;
 }
 
 .node text {
-font-size:10px; 
+font-size:10px;
 }
 
 .link {
@@ -133,7 +133,7 @@ font-size:10px;
     color: #484848;
     border-color: #484848;
 }
-    
+
 #dc-code-container {
     max-height: 400px;
     overflow-y: scroll;
