@@ -129,22 +129,10 @@ function createTree(treeData) {
         .call(zoomListener);
 
     // Helper functions for collapsing and expanding nodes.
-
-    function collapse(d) {
-        if (d.children) {
-            d._children = d.children;
-            d._children.forEach(collapse);
-            d.children = null;
-        }
-    }
-
-    function expand(d) {
-        if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand);
-            d._children = null;
-        }
-    }
+    function collapse(d)		{ d.children = null; }
+		function expand(d)			{ d.children = d._children; }
+		function collapseAll(d) { collapse(d) && d.children.forEach(collapse); }
+    function expandAll(d)		{ expand(d) && d.children.forEach(expand); }
 
     var overCircle = function(d) {
         selectedNode = d;
@@ -181,15 +169,13 @@ function createTree(treeData) {
     }
 
     // Toggle children function
+		function hasChildren(d) { return d._children ? true : false; }
+		function expanded(d) { return d.children ? true : false; }
 
     function toggleChildren(d) {
-        if (d.children) {
-            d._children = d.children;
-            d.children = null;
-        } else if (d._children) {
-            d.children = d._children;
-            d._children = null;
-        }
+    		if (hasChildren(d)) {
+						expanded(d) ? collapse(d) : expand(d);
+				}
         return d;
     }
 
