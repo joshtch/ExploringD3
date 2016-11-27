@@ -23,7 +23,10 @@ var txt = "";
 		var readmePath = "https://raw.githubusercontent.com/d3/" + name + "/master/README.md"
 
 		getReadme(readmePath).then(function(fileHTML) {
-			$(DESC).html(fileHTML);
+			var parsedReadme = parseReadme(fileHTML)
+			// console.log(parsed)
+			
+			$(DESC).html(parsedReadme);
 		})
 	}
 
@@ -41,4 +44,9 @@ function getReadme (file) {
             req.open("GET", file);
             req.send();
         });
+}
+
+function parseReadme (readme) {
+	var converter = new showdown.Converter();
+    return converter.makeHtml(readme);
 }
