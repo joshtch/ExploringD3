@@ -126,21 +126,100 @@ function createTree(treeData) {
         }
     }
 
-    // Define the zoom function for the zoomable tree
-
-    function zoom() {
-        svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    }
+    /**************************************************************************
+     *                                                                        *
+     *                           Navigation Behavior                          *
+     *                                                                        *
+     **************************************************************************/
 
     // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
     var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+    var curr_scale = 1.0;
 
-    // define the baseSvg, attaching a class for styling and the zoomListener
-    var baseSvg = d3.select("#tree-container").append("svg")
-        .attr("width", viewerWidth)
-        .attr("height", viewerHeight)
-        .attr("class", "overlay")
-        .call(zoomListener);
+    // define the zoom function for the zoomable tree
+    function zoom() {
+        curr_scale = d3.event.scale;
+        svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    // center appropriate associated node when a node is clicked
+    function centerClick(source) {
+
+        // if the node has no children, do not center
+        if (source.children == undefined && source._children == undefined)
+            return;
+
+        // else, center the relevant component
+        else {
+
+            // if we just opened a node, center its middle child
+            if (source.children != undefined) {
+
+                to_center = getMiddleChild(source);
+
+                // scale the tree according to the number of children
+                num_children = source.children.length;
+                children_height = num_children * (25 * curr_scale);
+
+                if (children_height > viewerHeight) {
+                    adjust = (children_height / viewerHeight) * 1.1;
+                    scale = zoomListener.scale() / adjust;
+                    curr_scale /= adjust;
+                } else {
+                    scale = resetScale();
+                }
+
+            // if we just closed a node, center the nodes on its level
+            } else if (source._children != undefined) {
+                to_center = getMiddleChild(source.parent);
+                scale = resetScale();
+            }
+
+            centerNodeOnScreen(to_center, scale);
+
+        }
+
+    }
+
+    function resetScale() {
+        new_scale = zoomListener.scale() / curr_scale;
+        curr_scale = 1;
+        return new_scale;
+    }
+
+    function centerNodeOnScreen(to_center, scale) {
+        x = -to_center.y0;
+        y = -to_center.x0;
+        x = x * scale + viewerWidth / 2;
+        y = y * scale + viewerHeight / 2;
+
+        d3.select('g')
+          .transition()
+          .duration(duration)
+          .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        zoomListener.scale(scale);
+        zoomListener.translate([x, y]);
+    }
+
+    function getMiddleChild(node) {
+        num_children = node.children.length;
+        middle_child = Math.floor(num_children / 2);
+        return node.children[middle_child];
+    }
+
+    /**************************************************************************
+     *                                                                        *
+     *                              Click Behavior                            *
+     *                                                                        *
+     **************************************************************************/
+
+    // Toggle children on click.
+    function click(d) {
+        d = toggleChildren(d);
+        update(d);
+        centerClick(d);
+        updateDetails(d);
+    }
 
     // Helper functions for collapsing and expanding nodes.
     function collapse(d) { 
@@ -176,43 +255,6 @@ function createTree(treeData) {
         updateTempConnector();
     };
 
-    // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
-
-    function centerClick(source) {
-
-        // find the children
-        children = source.children;
-
-        if (source.children != undefined) {
-
-            num_children = children.length;
-            middle_child = Math.floor(num_children / 2);
-
-            // center the middle child and also ensure that we fit
-            // all of the children
-            to_center = children[middle_child];
-
-        } else {
-
-            to_center = source;
-            
-        }
-
-        scale = zoomListener.scale();
-        x = -to_center.y0;
-        y = -to_center.x0;
-        x = x * scale + viewerWidth / 2;
-        y = y * scale + viewerHeight / 2;
-
-        d3.select('g')
-          .transition()
-          .duration(duration)
-          .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
-        zoomListener.scale(scale);
-        zoomListener.translate([x, y]);
-
-    }
-
     // Toggle children function
 	function hasChildren(d) { return d._children ? true : false; }
 	function expanded(d) { return d.children ? true : false; }
@@ -225,15 +267,6 @@ function createTree(treeData) {
 
         return d;
 
-    }
-
-    // Toggle children on click.
-
-    function click(d) {
-        d = toggleChildren(d);
-        update(d);
-        centerClick(d);
-        updateDetails(d);
     }
 
     function update(source) {
@@ -440,6 +473,13 @@ function createTree(treeData) {
             }
         }
     }
+
+    // define the baseSvg, attaching a class for styling and the zoomListener
+    var baseSvg = d3.select("#tree-container").append("svg")
+        .attr("width", viewerWidth)
+        .attr("height", viewerHeight)
+        .attr("class", "overlay")
+        .call(zoomListener);
 
     // Append a group which holds all nodes and which the zoom Listener can act upon.
     var svgGroup = baseSvg.append("g");
