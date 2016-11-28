@@ -1,9 +1,9 @@
 // Constants for id's of elements within the detail-container
 var txt = "";
 
-jQuery.fn.scrollTo = function(elem) { 
-    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top); 
-    return this; 
+jQuery.fn.scrollTo = function(elem) {
+    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
+    return this;
 };
 
 var TITLE = "#dc-title";
@@ -19,10 +19,6 @@ var DESC = "#dc-description";
 
 		var path = "dataset/d3-core-js/" + name + ".js";
 
-		getFileText(path).then(function(fileText) {
-			$(TEXT).html(jQuery.parseHTML(fileText))
-		});
-
 		var readmeName = d.name;
 
 		if(d.type == "function"){
@@ -35,6 +31,7 @@ var DESC = "#dc-description";
 
 		getReadme(readmePath).then(function(fileHTML) {
 			var parsedReadme = parseReadme(fileHTML);
+
 			$(DESC).html(parsedReadme);
 			var tagSelector
 			if(d.type == "function") {
@@ -44,8 +41,9 @@ var DESC = "#dc-description";
 			}
 			$("#dc-description-container").scrollTo(tagSelector);
 		})
-	}
 
+		updateCode(path);
+}
 
 function getReadme (file) {
 	console.log("getReadme called")
