@@ -1,6 +1,11 @@
 // Constants for id's of elements within the detail-container
 var txt = "";
 
+jQuery.fn.scrollTo = function(elem) { 
+    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top); 
+    return this; 
+};
+
 var TITLE = "#dc-title";
 var TEXT = "#dc-code-text";
 var DESC = "#dc-description";
@@ -14,16 +19,30 @@ var DESC = "#dc-description";
 
 		var path = "dataset/d3-core-js/" + name + ".js";
 
-		//TODO check to see if this is a
-
 		getFileText(path).then(function(fileText) {
 			$(TEXT).html(jQuery.parseHTML(fileText))
 		});
 
-		var readmePath = "https://raw.githubusercontent.com/d3/" + name + "/master/README.md"
+		var readmeName = d.name;
+
+		if(d.type == "function"){
+			readmeName = d.parent.name
+		}
+
+		console.log(readmeName);
+
+		var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
 
 		getReadme(readmePath).then(function(fileHTML) {
-			$(DESC).html(fileHTML);
+			var parsedReadme = parseReadme(fileHTML);
+			$(DESC).html(parsedReadme);
+			var tagSelector
+			if(d.type == "function") {
+				tagSelector = 'a[name=' + d.name + ']'
+			} else {
+				tagSelector = "#" + d.name.replace(/-/g, "")
+			}
+			$("#dc-description-container").scrollTo(tagSelector);
 		})
 	}
 
@@ -41,4 +60,9 @@ function getReadme (file) {
             req.open("GET", file);
             req.send();
         });
+}
+
+function parseReadme (readme) {
+	var converter = new showdown.Converter();
+    return converter.makeHtml(readme);
 }
