@@ -1,6 +1,11 @@
 // Constants for id's of elements within the detail-container
 var txt = "";
 
+jQuery.fn.scrollTo = function(elem) { 
+    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top); 
+    return this; 
+};
+
 var TITLE = "#dc-title";
 var TEXT = "#dc-code-text";
 var DESC = "#dc-description";
@@ -13,8 +18,6 @@ var DESC = "#dc-description";
 		$(TITLE).text(name);
 
 		var path = "dataset/d3-core-js/" + name + ".js";
-
-		//TODO check to see if this is a 
 
 		getFileText(path).then(function(fileText) {
 			$(TEXT).html(jQuery.parseHTML(fileText))
@@ -31,10 +34,15 @@ var DESC = "#dc-description";
 		var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
 
 		getReadme(readmePath).then(function(fileHTML) {
-			var parsedReadme = parseReadme(fileHTML)
-			// console.log(parsed)
-			
+			var parsedReadme = parseReadme(fileHTML);
 			$(DESC).html(parsedReadme);
+			var tagSelector
+			if(d.type == "function") {
+				tagSelector = 'a[name=' + d.name + ']'
+			} else {
+				tagSelector = "#" + d.name.replace(/-/g, "")
+			}
+			$("#dc-description-container").scrollTo(tagSelector);
 		})
 	}
 
