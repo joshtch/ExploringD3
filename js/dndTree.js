@@ -56,9 +56,15 @@ function createTree(treeData) {
     var duration = 750;
     var root;
 
-    // size of the diagram
-    var viewerWidth = $("#tree-container").width();
-    var viewerHeight = $("#tree-container").height();
+		// size of the entire page
+		var pageWidth = $("#tree-container").width();
+		var pageHeight = $("#tree-container").height();
+		// dimensions of detail panel
+		var sidePanelWidth = $("#detail-container").width();
+		var sidePanelHeight = $("#detail-container").height();
+		// dimensions of tree viewer region
+		var viewerWidth = pageWidth - sidePanelWidth;
+		var viewerHeight = pageHeight;
 
     var tree = d3.layout.tree()
         .size([viewerHeight, viewerWidth]);
@@ -137,22 +143,10 @@ function createTree(treeData) {
         .call(zoomListener);
 
     // Helper functions for collapsing and expanding nodes.
-
-    function collapse(d) {
-        if (d.children) {
-            d._children = d.children;
-            d._children.forEach(collapse);
-            d.children = null;
-        }
-    }
-
-    function expand(d) {
-        if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand);
-            d._children = null;
-        }
-    }
+    function collapse(d)		{ d.children = null; }
+		function expand(d)			{ d.children = d._children; }
+		function collapseAll(d) { collapse(d) && d.children.forEach(collapse); }
+    function expandAll(d)		{ expand(d) && d.children.forEach(expand); }
 
     var overCircle = function(d) {
         selectedNode = d;
@@ -200,15 +194,13 @@ function createTree(treeData) {
     }
 
     // Toggle children function
+		function hasChildren(d) { return d._children ? true : false; }
+		function expanded(d) { return d.children ? true : false; }
 
     function toggleChildren(d) {
-        if (d.children) {
-            d._children = d.children;
-            d.children = null;
-        } else if (d._children) {
-            d.children = d._children;
-            d._children = null;
-        }
+    		if (hasChildren(d)) {
+						expanded(d) ? collapse(d) : expand(d);
+				}
         return d;
     }
 
@@ -238,7 +230,7 @@ function createTree(treeData) {
             }
         };
         childCount(0, root);
-        var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line  
+        var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line
         tree = tree.size([newHeight, viewerWidth]);
 
         // Compute the new tree layout.
@@ -394,7 +386,7 @@ function createTree(treeData) {
     }
 
     function collapseAll(node) {
-        
+
         if (node.children) {
             node._children = node.children;
             node.children = null;
