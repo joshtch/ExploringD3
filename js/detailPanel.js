@@ -1,14 +1,14 @@
 // Constants for id's of elements within the detail-container
 var txt = "";
 
-	var TITLE = "#dc-title";
-	var TEXT = "#dc-code-text";
-	var DESC = "#dc-description";
+var TITLE = "#dc-title";
+var TEXT = "#dc-code-text";
+var DESC = "#dc-description";
 
 	function updateDetails (d) {
 
 		$("#detail-container").css("visibility", "visible");
-		
+
 		var name = d.name;
 		$(TITLE).text(name);
 

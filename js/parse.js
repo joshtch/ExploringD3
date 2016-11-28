@@ -1,7 +1,6 @@
 function jsonifyModules(file, callback, debug) {
 
     getFileText(file).then(function(fileText) {
-       
         var d3 = new Object();
 
         var module_regex = /export {([^\}]*)} from "([^\"]+)";/g;
@@ -17,7 +16,7 @@ function jsonifyModules(file, callback, debug) {
         d3.type = "library";
 
         if (debug) {
-            var url = 'data:text/json;charset=utf8,' + 
+            var url = 'data:text/json;charset=utf8,' +
                       encodeURIComponent(JSON.stringify(d3));
             window.open(url, '_blank');
             window.focus();
@@ -39,11 +38,11 @@ function getModuleInfo(module) {
     var export_regex = /(?:[\s]+)([^,]+)/g;
     var exports = []
 
-    processMatches(export_regex, module_body, function(match) { 
+    processMatches(export_regex, module_body, function(match) {
         var module_fun = new Object();
         module_fun.name = match[1];
         module_fun.type = "function";
-        exports.push(module_fun); 
+        exports.push(module_fun);
     });
 
     var module_info = new Object();
@@ -64,7 +63,7 @@ function processMatches(regex, str, f_match) {
 }
 
 function getFileText(file) {
-    
+
     return new Promise(function(resolve, reject) {
                     var req = new XMLHttpRequest();
                     req.onreadystatechange = function() {
