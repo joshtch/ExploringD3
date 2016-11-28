@@ -154,3 +154,12 @@ font-size:10px;
     max-height: 400px;
     overflow-y: scroll;
 }
+
+#dc-description {
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+#dc-description p {
+    white-space: pre-wrap;
+}
