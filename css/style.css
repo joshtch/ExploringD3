@@ -132,6 +132,10 @@ font-size:10px;
     color: gray;
     cursor: pointer;
 }
+#dc-code-text {
+    margin-bottom: 10px;
+    bottom: 0px;
+}
 
 #reset-button:hover {
     color: #484848;
@@ -139,11 +143,14 @@ font-size:10px;
 }
 
 #dc-code-container {
-    max-height: 400px;
+    height:45%;
+    /*max-height: 400px;*/
+    bottom:0px;
     overflow-y: scroll;
 }
 
 #dc-description-container {
+    height:50%;
     max-height: 400px;
     overflow-y: scroll;
 }
