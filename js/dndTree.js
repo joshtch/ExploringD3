@@ -25,6 +25,20 @@ OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
+// sanatize the D3 JSON 
+function createD3Tree(d3JSON) {
+
+    for (var i = 0; i < d3JSON.children.length;) {
+        if (d3JSON.children[i].name == "./build/package") {
+            d3JSON.children.splice(i, 1);
+        } else {
+            i++;
+        }
+    }
+
+    createTree(d3JSON);
+}
+
 // Get JSON data
 function createTree(treeData) {
 
@@ -155,18 +169,29 @@ function createTree(treeData) {
 
         // find the children
         children = source.children;
-        num_children = children.length;
-        middle_child = Math.floor(num_children / 2);
 
-        // center the middle child and also ensure that we fit
-        // all of the children
-        to_center = children[middle_child];
+        if (source.children != undefined) {
+
+            num_children = children.length;
+            middle_child = Math.floor(num_children / 2);
+
+            // center the middle child and also ensure that we fit
+            // all of the children
+            to_center = children[middle_child];
+
+        } else {
+
+            to_center = source;
+            
+        }
 
         scale = zoomListener.scale();
         x = -to_center.y0;
         y = -to_center.x0;
-        x = x * scale + (2 * viewerWidth) / 3;
+        x = x * scale + viewerWidth / 2;
         y = y * scale + viewerHeight / 2;
+
+
         d3.select('g').transition()
             .duration(duration)
             .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
@@ -192,7 +217,7 @@ function createTree(treeData) {
     function click(d) {
         d = toggleChildren(d);
         update(d);
-        centerNode(d);
+        centerClick(d);
         updateDetails(d);
     }
 
@@ -222,7 +247,7 @@ function createTree(treeData) {
 
         // Set widths between levels based on maxLabelLength.
         nodes.forEach(function(d) {
-            d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
+            d.y = (d.depth * (maxLabelLength * 5)); //maxLabelLength * 10px
             // alternatively to keep a fixed scale one can set a fixed depth per level
             // Normalize for fixed-depth by commenting out below line
             // d.y = (d.depth * 500); //500px per level.
@@ -293,7 +318,7 @@ function createTree(treeData) {
         node.select("circle.nodeCircle")
             .attr("r", 4.5)
             .style("fill", function(d) {
-                return d._children ? "#7f9b66" : d.children ? "#7f9b66" : "#A6D785";
+                return d._children || d.children ? "#7f9b66" : "#A6D785";
             });
 
         // Transition nodes to their new position.
