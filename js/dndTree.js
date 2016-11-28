@@ -56,15 +56,15 @@ function createTree(treeData) {
     var duration = 750;
     var root;
 
-		// size of the entire page
-		var pageWidth = $("#tree-container").width();
-		var pageHeight = $("#tree-container").height();
-		// dimensions of detail panel
-		var sidePanelWidth = $("#detail-container").width();
-		var sidePanelHeight = $("#detail-container").height();
-		// dimensions of tree viewer region
-		var viewerWidth = pageWidth - sidePanelWidth;
-		var viewerHeight = pageHeight;
+	// size of the entire page
+	var pageWidth = $("#tree-container").width();
+	var pageHeight = $("#tree-container").height();
+	// dimensions of detail panel
+	var sidePanelWidth = $("#detail-container").width();
+	var sidePanelHeight = $("#detail-container").height();
+	// dimensions of tree viewer region
+	var viewerWidth = pageWidth - sidePanelWidth;
+	var viewerHeight = pageHeight;
 
     var tree = d3.layout.tree()
         .size([viewerHeight, viewerWidth]);
@@ -143,9 +143,28 @@ function createTree(treeData) {
         .call(zoomListener);
 
     // Helper functions for collapsing and expanding nodes.
-    function collapse(d)		{ d.children = null; }
-		function expand(d)			{ d.children = d._children; }
-		function collapseAll(d) { collapse(d) && d.children.forEach(collapse); }
+    function collapse(d) { 
+        d.children = null; 
+        unhighlight(d);
+    }
+
+	function expand(d) { 
+        d.children = d._children;
+        collapseOthers(d);
+        highlight(d);
+    }
+
+    // close all other children at your level
+    function collapseOthers(d) {
+        for (var i = 0; i < d.parent.children.length; i++) {
+            if (d.parent.children[i] == d)
+                continue;
+            else
+                collapse(d.parent.children[i]);
+        }
+    }
+ 
+	function collapseAll(d) { collapse(d) && d.children.forEach(collapse); }
     function expandAll(d)		{ expand(d) && d.children.forEach(expand); }
 
     var overCircle = function(d) {
@@ -185,23 +204,27 @@ function createTree(treeData) {
         x = x * scale + viewerWidth / 2;
         y = y * scale + viewerHeight / 2;
 
-
-        d3.select('g').transition()
-            .duration(duration)
-            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        d3.select('g')
+          .transition()
+          .duration(duration)
+          .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
         zoomListener.scale(scale);
         zoomListener.translate([x, y]);
+
     }
 
     // Toggle children function
-		function hasChildren(d) { return d._children ? true : false; }
-		function expanded(d) { return d.children ? true : false; }
+	function hasChildren(d) { return d._children ? true : false; }
+	function expanded(d) { return d.children ? true : false; }
 
     function toggleChildren(d) {
-    		if (hasChildren(d)) {
-						expanded(d) ? collapse(d) : expand(d);
-				}
+
+		if (hasChildren(d)) {
+			expanded(d) ? collapse(d) : expand(d);
+		}
+
         return d;
+
     }
 
     // Toggle children on click.
@@ -234,8 +257,8 @@ function createTree(treeData) {
         tree = tree.size([newHeight, viewerWidth]);
 
         // Compute the new tree layout.
-        var nodes = tree.nodes(root).reverse(),
-            links = tree.links(nodes);
+        var nodes = tree.nodes(root).reverse();
+        var links = tree.links(nodes);
 
         // Set widths between levels based on maxLabelLength.
         nodes.forEach(function(d) {
@@ -253,14 +276,18 @@ function createTree(treeData) {
 
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("g")
-            .attr("class", "node")
+            .attr("class", function(d) {
+                return "node " + d.name;
+            })
             .attr("transform", function(d) {
                 return "translate(" + source.y0 + "," + source.x0 + ")";
             })
             .on('click', click);
 
         nodeEnter.append("circle")
-            .attr('class', 'nodeCircle')
+            .attr("class", function(d) {
+                return "nodeCircle " + d.name;
+            })
             .attr("r", 0)
             .style("fill", function(d) {
                 return d._children ? "#7f9b66" : d._children ? "#7f9b66" : "#A6D785";
@@ -271,7 +298,9 @@ function createTree(treeData) {
                 return d.children || d._children ? -10 : 10;
             })
             .attr("dy", ".35em")
-            .attr('class', 'nodeText')
+            .attr("class", function(d) {
+                return "nodeText " + d.name;
+            })
             .attr("text-anchor", function(d) {
                 return d.children || d._children ? "end" : "start";
             })
@@ -346,7 +375,9 @@ function createTree(treeData) {
 
         // Enter any new links at the parent's previous position.
         link.enter().insert("path", "g")
-            .attr("class", "link")
+            .attr("class", function(d) {
+                return "link " + d.target.name;
+            })
             .attr("d", function(d) {
                 var o = {
                     x: source.x0,
