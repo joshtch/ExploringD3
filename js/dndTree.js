@@ -59,12 +59,15 @@ function createTree(treeData) {
 	// size of the entire page
 	var pageWidth = $("#tree-container").width();
 	var pageHeight = $("#tree-container").height();
-	// dimensions of detail panel
+    var viewerWidth = pageWidth,
+        viewerHeight = pageHeight;
+
+    /* // dimensions of detail panel
 	var sidePanelWidth = $("#detail-container").width();
 	var sidePanelHeight = $("#detail-container").height();
 	// dimensions of tree viewer region
 	var viewerWidth = pageWidth - sidePanelWidth;
-	var viewerHeight = pageHeight;
+	var viewerHeight = pageHeight; */
 
     var tree = d3.layout.tree()
         .size([viewerHeight, viewerWidth]);
@@ -188,6 +191,7 @@ function createTree(treeData) {
     }
 
     function centerNodeOnScreen(to_center, scale) {
+
         x = -to_center.y0;
         y = -to_center.x0;
         x = x * scale + viewerWidth / 2;
@@ -215,10 +219,10 @@ function createTree(treeData) {
 
     // Toggle children on click.
     function click(d) {
-        d = toggleChildren(d);
+        closing = toggleChildren(d);
+        closing ? closeDetails() : updateDetails(d);
         update(d);
         centerClick(d);
-        updateDetails(d);
     }
 
     // Helper functions for collapsing and expanding nodes.
@@ -259,13 +263,20 @@ function createTree(treeData) {
 	function hasChildren(d) { return d._children ? true : false; }
 	function expanded(d) { return d.children ? true : false; }
 
+    // return true if the node was closed;
+    //        false if the node was opened or selected
     function toggleChildren(d) {
 
 		if (hasChildren(d)) {
 			expanded(d) ? collapse(d) : expand(d);
 		}
 
-        return d;
+        if (d.children != undefined && d.children != null)
+            return false;
+        else if (d._children != undefined)
+            return true;
+        else
+            return false;
 
     }
 
@@ -476,6 +487,7 @@ function createTree(treeData) {
 
     // define the baseSvg, attaching a class for styling and the zoomListener
     var baseSvg = d3.select("#tree-container").append("svg")
+        .attr("id", "tree-svg")
         .attr("width", viewerWidth)
         .attr("height", viewerHeight)
         .attr("class", "overlay")

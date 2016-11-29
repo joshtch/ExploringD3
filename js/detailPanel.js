@@ -10,39 +10,47 @@ var TITLE = "#dc-title";
 var TEXT = "#dc-code-text";
 var DESC = "#dc-description";
 
-	function updateDetails (d) {
+function updateDetails (d) {
 
-		$("#detail-container").css("visibility", "visible");
+    $("#tree-container").addClass("side-panel");
+    $("#tree-svg").attr("width", $("#tree-container").width());
+	$("#detail-container").css("visibility", "visible");
 
-		var name = d.name;
-		$(TITLE).text(name);
+	var name = d.name;
+	$(TITLE).text(name);
 
-		var path = "dataset/d3-core-js/" + name + ".js";
+	var path = "dataset/d3-core-js/" + name + ".js";
 
-		var readmeName = d.name;
+	var readmeName = d.name;
 
-		if(d.type == "function"){
-			readmeName = d.parent.name
+	if(d.type == "function"){
+		readmeName = d.parent.name
+	}
+
+	console.log(readmeName);
+
+	var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
+
+	getReadme(readmePath).then(function(fileHTML) {
+		var parsedReadme = parseReadme(fileHTML);
+
+		$(DESC).html(parsedReadme);
+		var tagSelector
+		if(d.type == "function") {
+			tagSelector = 'a[name=' + d.name + ']'
+		} else {
+			tagSelector = "#" + d.name.replace(/-/g, "")
 		}
+		$("#dc-description-container").scrollTo(tagSelector);
+	})
 
-		console.log(readmeName);
+	updateCode(path);
+}
 
-		var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
-
-		getReadme(readmePath).then(function(fileHTML) {
-			var parsedReadme = parseReadme(fileHTML);
-
-			$(DESC).html(parsedReadme);
-			var tagSelector
-			if(d.type == "function") {
-				tagSelector = 'a[name=' + d.name + ']'
-			} else {
-				tagSelector = "#" + d.name.replace(/-/g, "")
-			}
-			$("#dc-description-container").scrollTo(tagSelector);
-		})
-
-		updateCode(path);
+function closeDetails() {
+    $("#tree-container").removeClass("side-panel");
+    $("#tree-svg").attr("width", $("#tree-container").width());
+    $("#detail-container").css("visibility", "hidden");
 }
 
 function getReadme (file) {
