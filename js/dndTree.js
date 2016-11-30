@@ -228,7 +228,7 @@ function createTree(treeData) {
     // Helper functions for collapsing and expanding nodes.
     function collapse(d) { 
         d.children = null; 
-        unhighlight(d);
+        unhighlight();
     }
 
 	function expand(d) { 
@@ -508,6 +508,8 @@ function createTree(treeData) {
 
     $("#reset-button").click(function() {
         collapseAllBut(root);
+        closeDetails();
+        unhighlight();
         update(root);
         centerClick(root);
     });
@@ -517,4 +519,8 @@ function createTree(treeData) {
         $("svg").attr("width", $("#tree-container").width());
     });
 
+}
+
+function resetTree() {
+    
 }

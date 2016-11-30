@@ -4,40 +4,43 @@ html {
 }
 
 body {
-    margin: 0px;
     font-family:sans-serif;
     height: 100%;
     background-color: #EEE;
+    overflow: hidden;
 }
 
 #caption {
     position: absolute;
-    bottom: 8%;
-    left: 5%;
-    width: 20%;
+    top: 30px;
+    right: 30px;
+    height: calc(100% - 70px);
+    width: calc(20% + 40px);
     z-index: 10;
     background-color: #EEE;
-    padding: 10px 20px;
+    padding: 20px;
+    border: solid 1px gray;
 }
 
 #caption h1 {
     font-size: 20px;
     font-weight: 400;
+    margin-top: 0px;
 }
 
 #caption h3 {
     font-size: 14px;
     font-weight: 300;
-    margin: 0 0 0px 0;
+    margin: 20px 0;
     color: gray;
+    line-height: 1.5;
 }
 
 #caption h5,
-#caption #key h1 {
+#key h1 {
     font-size: 12px;
     font-weight: 300;
     color: gray;
-    text-transform: none;
     margin: 0;
 }
 
@@ -45,25 +48,36 @@ body {
     color: gray;
 }
 
-#caption #key {
-    display: flex;
-    margin: 20px 0px;
+#caption hr {
+    margin-top: 15px;
+    margin-bottom: 20px; 
+    border-top: solid 1px gray;
 }
 
-#caption #key h1 {
+#key {
+    display: flex;
+}
+
+#key h1 {
     flex: 1;
 }
 
-#caption #key svg {
+#key svg {
     margin-right: 10px;
 }
 
-#caption #key div {
-    flex: 2;
-    float: right;
+#key div {
+    flex: 3;
     font-size: 12px;
     font-weight: 300;
     color: gray;
+}
+
+#built-with {
+    width: calc(100% - 40px);
+    text-align: right;
+    position: absolute; 
+    bottom: 20px;
 }
 
 .node {
@@ -132,25 +146,41 @@ font-size:10px;
     direction: ltr;
 }
 
-#reset-button {
+#button-container {
+    position: fixed; 
+    left: 30px; 
+    bottom: 30px; 
+    z-index: 10;
+}
+
+#reset-button,
+#refresh-button {
     display: inline-block;
     position: relative;
+    width: 80px;
+    text-align: center;
     padding: 5px 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     border: solid 1px gray;
     border-radius: 5px;
     font-size: 10px;
     color: gray;
     cursor: pointer;
 }
+
+#refresh-button {
+    margin-left: 15px;
+}
+
+#reset-button:hover,
+#refresh-button:hover {
+    color: #484848;
+    border-color: #484848;
+}
+
 #dc-code-text {
     margin-bottom: 10px;
     bottom: 0px;
-}
-
-#reset-button:hover {
-    color: #484848;
-    border-color: #484848;
 }
 
 #dc-code-container {

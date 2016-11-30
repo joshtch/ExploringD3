@@ -1,6 +1,7 @@
 function jsonifyModules(file, callback, debug) {
 
     getFileText(file).then(function(fileText) {
+
         var d3 = new Object();
 
         var module_regex = /export {([^\}]*)} from "([^\"]+)";/g;

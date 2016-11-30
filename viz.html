@@ -25,50 +25,87 @@
 <script src="js/parse.js"></script>
 <script src="js/detailPanel.js"></script>
 <script src="js/pathHighlighting.js"></script>
+<script src="js/refreshTree.js"></script>
 <script src="js/dndTree.js"></script>
 <script src="js/detailCodeBlock.js"></script>
 
 <script>
 
     $(document).ready(function () {
+
         jsonifyModules("dataset/d3/index.js", createD3Tree, false);
+
     });
 
 </script>
 
 <body>
 
-    <!-- <div id="caption">
+    <div id="caption">
+
         <h1>
-            Now it's your turn to explore D3!
+            <i>Let's explore D3!</i>
         </h1>
+
+        <hr>
+
         <h3>
-            <p>Just click and drag to move the visualization. To expand or shrink a node just click it. To zoom in on the visualization, scroll up; to zoom out, scroll down. Have fun!</p>
+
+            <p>
+                Use the tree to the left to see what capabilities D3 offers. 
+            </p>
+
+            <p>
+                To interact with the tree, just click to expand a node. Click the node again to shrink the node.
+            </p>
+
+            <p>
+                And, to zoom in on the visualization, scroll up; to zoom out, scroll down.
+            </p>
+
+            <p>
+                <i>Have fun!</i>
+            </p>
+
         </h3>
-        <div id="key">
-            <h1>
-                Key:
-            </h1>
-            <div>
-                <svg width="9" height="9">
-                    <circle cx="4.5" cy="4.5" r="4.5" style="fill: #7f9b66;"></circle>
-                </svg> D3 Module
-            </div>
-            <div>
-                <svg width="9" height="9">
-                    <circle cx="4.5" cy="4.5" r="4.5" style="fill: #A6D785;"></circle>
-                </svg> D3 Function
-            </div>
-        </div>
-        <h5>
+
+        <h5 id="built-with">
+
             Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
+
         </h5>
 
-        <div id="reset-button">
-            Reset Tree
+    </div>
+
+    <!-- <div id="key" style="position: fixed; top: 20px; left: 20px; width: 200px; z-index: 10;">
+
+        <h1>
+            Key:
+        </h1>
+
+        <div>
+            <svg width="9" height="9">
+                <circle cx="4.5" cy="4.5" r="4.5" style="fill: #7f9b66;"></circle>
+            </svg> D3 Module
+            <br>
+            <svg width="9" height="9">
+                <circle cx="4.5" cy="4.5" r="4.5" style="fill: #A6D785;"></circle>
+            </svg> D3 Function
         </div>
 
     </div> -->
+
+    <div id="button-container">
+
+        <div id="reset-button">
+                Reset Tree
+        </div>
+
+        <div id="refresh-button">
+            Refresh Tree
+        </div>
+
+    </div>
 
     <div id="tree-container">
     </div>

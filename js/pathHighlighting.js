@@ -10,7 +10,7 @@ function highlightNodePath(d) {
     if (d.parent) { highlightNodePath(d.parent) }
 }
 
-function unhighlight(d) {
+function unhighlight() {
     unfadeAllPaths();
 }
 
