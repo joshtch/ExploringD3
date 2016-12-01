@@ -7,6 +7,7 @@ function updateCode(path) {
 		editor.setReadOnly(true);
 		editor.renderer.$cursorLayer.element.style.display = "none";
 		editor.renderer.setShowGutter(false);
+		editor.$blockScrolling = Infinity;
 
 		getFileText(path).then(function(fileText) {
 				editor.setValue(fileText, -1);
