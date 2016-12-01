@@ -11,12 +11,6 @@ function updateCode(path) {
 		getFileText(path).then(function(fileText) {
 				editor.setValue(fileText, -1);
 				var codeLength = editor.session.getLength();
-				var viewSize = codeLength * 12;
-				if (codeLength > 360) {
-						$("#dc-code-text").css("height", "360px");
-				} else {
-						$("#dc-code-text").css("height", codeLength + "px");
-				}
 				editor.resize()
 		});
 }
