@@ -1,6 +1,6 @@
 function updateCode(path) {
 		var editor = ace.edit("dc-code-container");
-		editor.setTheme("ace/theme/iplastic");
+		editor.setTheme("ace/theme/dawn");
 		editor.getSession().setMode("ace/mode/javascript");
 		editor.setHighlightActiveLine(false);
 		editor.setShowPrintMargin(false);
