@@ -22,6 +22,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ext-static_highlight.js"></script>
 
+<!-- Font Awesome -->
+<script src="https://use.fontawesome.com/d46185390d.js"></script>
+
 <script src="js/parse.js"></script>
 <script src="js/detailPanel.js"></script>
 <script src="js/pathHighlighting.js"></script>
@@ -40,42 +43,6 @@
 </script>
 
 <body>
-
-    <div id="caption">
-
-        <h1>
-            <i>Let's explore D3!</i>
-        </h1>
-
-        <hr>
-
-        <h3>
-
-            <p>
-                Use the tree to the left to see what capabilities D3 offers. 
-            </p>
-
-            <p>
-                To interact with the tree, just click to expand a node. Click the node again to shrink the node.
-            </p>
-
-            <p>
-                And, to zoom in on the visualization, scroll up; to zoom out, scroll down.
-            </p>
-
-            <p>
-                <i>Have fun!</i>
-            </p>
-
-        </h3>
-
-        <h5 id="built-with">
-
-            Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
-
-        </h5>
-
-    </div>
 
     <!-- <div id="key" style="position: fixed; top: 20px; left: 20px; width: 200px; z-index: 10;">
 
@@ -98,7 +65,7 @@
     <div id="button-container">
 
         <div id="reset-button">
-                Reset Tree
+            Reset Tree
         </div>
 
         <div id="refresh-button">
@@ -110,14 +77,62 @@
     <div id="tree-container">
     </div>
 
-    <div id="detail-container" class="panel-body panel-resizable">
-        <!-- <h1 id="dc-title"></h1> -->
-        <div id="dc-description-container">
-          <p><pre id="dc-description"></pre></p>
-        </div>
-        <hr/>
+    <div id="search-container">
+        <input id="search-bar" placeholder="Search">
+        </input>
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
 
-        <p><div id="dc-code-container"></div></p>
+    <div id="detail-container" class="panel-body panel-resizable show-caption">
+
+        <div id="caption">
+
+            <h1>
+                <i>Let's explore D3!</i>
+            </h1>
+
+            <hr>
+
+            <h3>
+
+                <p>
+                    Use the tree to the left to see what capabilities D3 offers. 
+                </p>
+
+                <p>
+                    To interact with the tree, just click to expand a node. Click the node again to shrink the node.
+                </p>
+
+                <p>
+                    And, to zoom in on the visualization, scroll up; to zoom out, scroll down.
+                </p>
+
+                <p>
+                    <i>Have fun!</i>
+                </p>
+
+            </h3>
+
+            <h5 id="built-with">
+
+                Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
+
+            </h5>
+
+        </div>
+
+        <!-- <h1 id="dc-title"></h1> -->
+        <div id="info-container">
+
+            <div id="dc-description-container">
+              <p><pre id="dc-description"></pre></p>
+            </div>
+
+            <hr/>
+
+            <div id="dc-code-container"></div>
+        </div>
+
     </div>
 
 </body>

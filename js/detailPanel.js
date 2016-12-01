@@ -14,7 +14,13 @@ function updateDetails (d) {
 
     $("#tree-container").addClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
-	$("#detail-container").css("visibility", "visible");
+    $("#detail-container").addClass("expanded");
+    $("#detail-container").removeClass("show-caption");
+    $("#detail-container").addClass("hide-caption");
+    setTimeout(function() {
+        $("#detail-container").addClass("show-info");
+        populateDetails(d);
+    }, 125);
 
 	var name = d.name;
 	$(TITLE).text(name);
@@ -45,12 +51,21 @@ function updateDetails (d) {
 	})
 
 	updateCode(path);
+    
 }
 
 function closeDetails() {
     $("#tree-container").removeClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
-    $("#detail-container").css("visibility", "hidden");
+    $("#detail-container").removeClass("show-info");
+    $("#detail-container").removeClass("expanded");
+    setTimeout(function() {
+        $("#detail-container").removeClass("hide-caption");
+        // trick the container to fade in - TO CLEAN
+        setTimeout(function() {
+            $("#detail-container").addClass("show-caption");
+        }, 0);
+    }, 125);    
 }
 
 function getReadme (file) {
