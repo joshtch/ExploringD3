@@ -50,8 +50,7 @@ function updateDetails (d) {
 		$("#dc-description-container").scrollTo(tagSelector);
 	})
 
-	updateCode(path);
-    
+	updateCode(d);
 }
 
 function closeDetails() {
