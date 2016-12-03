@@ -36,7 +36,7 @@ function getModuleInfo(module) {
     var module_body = module[1];
     var module_name = module[2];
 
-    var export_regex = /(?:[\s]+)([^,]+)/g;
+    var export_regex = /(?:[\s]+)([^,\n]+)/g;
     var exports = []
 
     processMatches(export_regex, module_body, function(match) {
