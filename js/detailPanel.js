@@ -2,8 +2,8 @@
 var txt = "";
 
 jQuery.fn.scrollTo = function(elem) {
-    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
-    return this;
+	$(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
+	return this;
 };
 
 var TITLE = "#dc-title";
@@ -64,25 +64,25 @@ function closeDetails() {
         setTimeout(function() {
             $("#detail-container").addClass("show-caption");
         }, 0);
-    }, 125);    
+    }, 125);
 }
 
 function getReadme (file) {
 	console.log("getReadme called")
 	return new Promise(function(resolve, reject) {
-        var req = new XMLHttpRequest();
-            req.onreadystatechange = function() {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    resolve(req.responseText);
-                }
-            }
-            req.onerror = reject;
-            req.open("GET", file);
-            req.send();
-        });
+		var req = new XMLHttpRequest();
+		req.onreadystatechange = function() {
+			if (req.readyState == XMLHttpRequest.DONE) {
+				resolve(req.responseText);
+			}
+		}
+		req.onerror = reject;
+		req.open("GET", file);
+		req.send();
+	});
 }
 
 function parseReadme (readme) {
 	var converter = new showdown.Converter();
-    return converter.makeHtml(readme);
+	return converter.makeHtml(readme);
 }
