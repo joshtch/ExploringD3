@@ -39,12 +39,14 @@ function getModuleInfo(module) {
     var export_regex = /(?:[\s]+)([^,\n]+)/g;
     var exports = []
 
-    processMatches(export_regex, module_body, function(match) {
-        var module_fun = new Object();
-        module_fun.name = match[1];
-        module_fun.type = "function";
-        exports.push(module_fun);
-    });
+		processMatches(export_regex, module_body, function(match) {
+				if (notComment(match[1])) {
+						var module_fun = new Object();
+						module_fun.name = match[1];
+						module_fun.type = "function";
+						exports.push(module_fun);
+				}
+		});
 
     var module_info = new Object();
     module_info.name = module_name;
@@ -77,4 +79,8 @@ function getFileText(file) {
                     req.send();
                 });
 
+}
+
+function notComment(match) {
+	return match.indexOf("// DEPRECATED") != 0;
 }
