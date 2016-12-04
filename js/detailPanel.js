@@ -31,6 +31,10 @@ function updateDetails (d) {
         populateDetails(d);
     }, 125);
 
+}
+
+function populateDetails(d) {
+
     // show appropriate detail pane for module vs. function
     if (d.type == "module") {
         $("#info-container").addClass("show-module");
