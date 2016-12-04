@@ -1,6 +1,10 @@
 // Constants for id's of elements within the detail-container
 var txt = "";
 
+$(document).ready(function() {
+    $("#toggle-tab").click(toggleTab);
+});
+
 jQuery.fn.scrollTo = function(elem) {
     $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
     return this;
@@ -12,6 +16,7 @@ var DESC = "#dc-description";
 
 function updateDetails (d) {
 
+    // transition
     $("#tree-container").addClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
     $("#detail-container").addClass("expanded");
@@ -22,6 +27,13 @@ function updateDetails (d) {
         populateDetails(d);
     }, 125);
 
+    // show appropriate detail pane for module vs. function
+    if (d.type == "module") {
+        $("#info-container").addClass("show-module");
+    } else {
+        $("#info-container").removeClass("show-module");
+    }
+
 	var name = d.name;
 	$(TITLE).text(name);
 
@@ -29,7 +41,7 @@ function updateDetails (d) {
 
 	var readmeName = d.name;
 
-	if(d.type == "function"){
+	if (d.type == "function"){
 		readmeName = d.parent.name
 	}
 
@@ -44,11 +56,13 @@ function updateDetails (d) {
 		var tagSelector
 		if(d.type == "function") {
 			tagSelector = 'a[name=' + d.name + ']'
+            $("#dc-description-container").scrollTo(tagSelector);
 		} else {
-			tagSelector = "#" + d.name.replace(/-/g, "")
+			/* tagSelector = "#" + d.name.replace(/-/g, "") */
+            $("#dc-description-container").scrollTop(0);
 		}
-		$("#dc-description-container").scrollTo(tagSelector);
-	})
+		
+	});
 
 	updateCode(path);
     
@@ -86,4 +100,16 @@ function getReadme (file) {
 function parseReadme (readme) {
 	var converter = new showdown.Converter();
     return converter.makeHtml(readme);
+}
+
+function toggleTab () {
+
+    $("#toggle-tab").toggleClass("show-code");
+
+    var code = "View Code";
+    var readme = "View Read Me";
+
+    $("#toggle-tab").text() == readme ? $("#toggle-tab").text(code)
+                                      : $("#toggle-tab").text(readme);
+
 }
