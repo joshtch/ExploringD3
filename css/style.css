@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    font-family:sans-serif;
+    font-family: sans-serif;
     height: 100%;
     background-color: #EEE;
     overflow: hidden;
@@ -32,7 +32,7 @@ body {
 #built-with {
     width: calc(100% - 40px);
     text-align: right;
-    position: absolute; 
+    position: absolute;
     bottom: 20px;
 }
 
@@ -246,14 +246,14 @@ font-size:10px;
 
 #caption hr {
     margin-top: 15px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     border-top: solid 1px gray;
 }
 
 #button-container {
-    position: fixed; 
-    left: 30px; 
-    bottom: 30px; 
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
     z-index: 10;
 }
 
@@ -322,7 +322,7 @@ font-size:10px;
 
 #search-container {
     position: fixed;
-    top: 30px; 
+    top: 30px;
     left: 30px;
     z-index: 10;
     width: 15%;
