@@ -4,54 +4,10 @@ html {
 }
 
 body {
-    font-family:sans-serif;
+    font-family: sans-serif;
     height: 100%;
     background-color: #EEE;
     overflow: hidden;
-}
-
-#caption {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    height: calc(100% - 70px);
-    width: calc(20% + 40px);
-    z-index: 10;
-    background-color: #EEE;
-    padding: 20px;
-    border: solid 1px gray;
-}
-
-#caption h1 {
-    font-size: 20px;
-    font-weight: 400;
-    margin-top: 0px;
-}
-
-#caption h3 {
-    font-size: 14px;
-    font-weight: 300;
-    margin: 20px 0;
-    color: gray;
-    line-height: 1.5;
-}
-
-#caption h5,
-#key h1 {
-    font-size: 12px;
-    font-weight: 300;
-    color: gray;
-    margin: 0;
-}
-
-#caption a {
-    color: gray;
-}
-
-#caption hr {
-    margin-top: 15px;
-    margin-bottom: 20px; 
-    border-top: solid 1px gray;
 }
 
 #key {
@@ -76,7 +32,7 @@ body {
 #built-with {
     width: calc(100% - 40px);
     text-align: right;
-    position: absolute; 
+    position: absolute;
     bottom: 20px;
 }
 
@@ -129,27 +85,115 @@ font-size:10px;
 }
 
 #detail-container {
-    visibility: hidden;
-    overflow-y: scroll;
-    height: 100%;
-    width: 30%;
     position: absolute;
-    right: 0%;
+    top: 30px;
+    right: 30px;
+    height: calc(100% - 70px);
+    width: calc(20% + 40px);
     z-index: 10;
     background-color: #EEE;
-    resize: horizontal;
-    overflow: hidden;
-    direction: rtl;
+    padding: 20px;
+    border: solid 1px gray;
+    -webkit-transition: width 0.25s ease-in-out;
+    -moz-transition: width 0.25s ease-in-out;
+    -o-transition: width 0.25s ease-in-out;
+    transition: width 0.25s ease-in-out;
 }
 
 #detail-container h1,h2,h3,p,pre {
     direction: ltr;
 }
 
+#detail-container.expanded {
+    width: calc(30% + 40px);
+}
+
+#detail-container #caption {
+    display: block;
+    opacity: 0;
+}
+
+#detail-container.show-caption #caption {
+    opacity: 1;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#detail-container.hide-caption #caption {
+    display: none;
+}
+
+#info-container {
+    height: 100%;
+    display: none;
+    opacity: 0;
+}
+
+#detail-container.expanded #info-container {
+    display: block;
+}
+
+#detail-container.show-info #info-container {
+    opacity: 1;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#caption {
+    /* position: absolute;
+    top: 30px;
+    right: 30px;
+    height: calc(100% - 70px);
+    width: calc(20% + 40px);
+    z-index: 10;
+    background-color: #EEE;
+    padding: 20px;
+    border: solid 1px gray; */
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+}
+
+#caption h1 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+
+#caption h3 {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 20px 0;
+    color: gray;
+    line-height: 1.5;
+}
+
+#caption h5,
+#key h1 {
+    font-size: 12px;
+    font-weight: 300;
+    color: gray;
+    margin: 0;
+}
+
+#caption a {
+    color: gray;
+}
+
+#caption hr {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-top: solid 1px gray;
+}
+
 #button-container {
-    position: fixed; 
-    left: 30px; 
-    bottom: 30px; 
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
     z-index: 10;
 }
 
@@ -203,4 +247,38 @@ font-size:10px;
 
 #dc-description p {
     white-space: pre-wrap;
+}
+
+#search-container {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
+    width: 15%;
+}
+
+#search-bar {
+    position: relative;
+    border: solid 1px gray;
+    background-color: #EEE;
+    border-radius: 5px;
+    padding: 5px 30px 5px 10px;
+    font-size: 12px;
+    width: 100%;
+    color: gray;
+}
+
+#search-bar + .fa-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5%;
+    z-index: 10;
+    color: #A8A8A8;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#search-bar + .fa-search:hover {
+    color: gray;
 }

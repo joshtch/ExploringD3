@@ -1,8 +1,8 @@
 var txt = "";
 
 jQuery.fn.scrollTo = function(elem) {
-    $(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
-    return this;
+	$(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
+	return this;
 };
 
 // Constants for id's of elements within the detail-container
@@ -18,7 +18,13 @@ function updateDetails (d) {
 
     $("#tree-container").addClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
-	$("#detail-container").css("visibility", "visible");
+    $("#detail-container").addClass("expanded");
+    $("#detail-container").removeClass("show-caption");
+    $("#detail-container").addClass("hide-caption");
+    setTimeout(function() {
+        $("#detail-container").addClass("show-info");
+        populateDetails(d);
+    }, 125);
 
 	var readmeName = d.name;
 	var path = "dataset/d3-core-js/" + readmeName + ".js";
@@ -43,7 +49,7 @@ function updateDetails (d) {
 		// $("#dc-description-container").scrollTo(tagSelector);
 	})
 
-	updateCode(path);
+	updateCode(d);
 }
 
 function extractReadmePart(readme, fileType, moduleName, functionName) {
@@ -82,25 +88,33 @@ function dummy () {
 function closeDetails() {
     $("#tree-container").removeClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
-    $("#detail-container").css("visibility", "hidden");
+    $("#detail-container").removeClass("show-info");
+    $("#detail-container").removeClass("expanded");
+    setTimeout(function() {
+        $("#detail-container").removeClass("hide-caption");
+        // trick the container to fade in - TO CLEAN
+        setTimeout(function() {
+            $("#detail-container").addClass("show-caption");
+        }, 0);
+    }, 125);
 }
 
 function getReadme (file) {
 	console.log("getReadme called")
 	return new Promise(function(resolve, reject) {
-        var req = new XMLHttpRequest();
-            req.onreadystatechange = function() {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    resolve(req.responseText);
-                }
-            }
-            req.onerror = reject;
-            req.open("GET", file);
-            req.send();
-        });
+		var req = new XMLHttpRequest();
+		req.onreadystatechange = function() {
+			if (req.readyState == XMLHttpRequest.DONE) {
+				resolve(req.responseText);
+			}
+		}
+		req.onerror = reject;
+		req.open("GET", file);
+		req.send();
+	});
 }
 
 function parseReadme (readme) {
 	var converter = new showdown.Converter();
-    return converter.makeHtml(readme);
+	return converter.makeHtml(readme);
 }
