@@ -52,7 +52,17 @@ function populateDetails(d) {
 
 	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
 
-    var parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
+    var parsedReadme;
+    if (d.readme)
+        parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
+    else {
+        var curr_node = d;
+        while (curr_node.readme == undefined) {
+            curr_node = curr_node.parent;
+        }
+        var parsedReadme = extractReadmePart(curr_node.readme, d.type, readmeName, d.name)    
+    }
+
     $(DESC).html(parsedReadme);
 
 	updateCode(d);
