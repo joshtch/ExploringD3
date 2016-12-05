@@ -23,7 +23,7 @@ function updateDetails (d) {
     $("#detail-container").addClass("hide-caption");
     setTimeout(function() {
         $("#detail-container").addClass("show-info");
-        populateDetails(d);
+        //populateDetails(d);
     }, 125);
 
 	var readmeName = d.name;
@@ -39,14 +39,24 @@ function updateDetails (d) {
 		var parsedReadme = extractReadmePart(fileHTML, d.type, readmeName, d.name)
 
 		$(DESC).html(parsedReadme);
-		var tagSelector;
+
+		if(d.type == "function"){
+			$("#pathModule").html("<a>" + readmeName.trim() + "</a>");
+			$("#pathFunction").html("/" + d.name);
+
+		} else {
+			$("#pathModule").html(readmeName.trim());
+			$("#pathFunction").html("")
+		}
+
+		// var tagSelector;
 		// if(d.type == "function") {
 		// 	tagSelector = 'a[name=' + d.name + ']'
 		// } else {
 		// 	tagSelector = "#" + d.name.replace(/-/g, "")
 		// }
 		// console.log(tagSelector)
-		// $("#dc-description-container").scrollTo(tagSelector);
+		$("#dc-description-container").scrollTop(0);
 	})
 
 	updateCode(d);
@@ -77,12 +87,8 @@ function extractReadmePart(readme, fileType, moduleName, functionName) {
 
 	
 
-	var head = '<h3><a id="parentModule">' + moduleName.trim() + '</a>/' + functionName.trim() + '</h3><hr/>'
-	return head + apiReference;
-}
-
-function dummy () {
-	console.log("h");
+	// var head = '<h3><a id="parentModule">' + moduleName.trim() + '</a>/' + functionName.trim() + '</h3><hr/>'
+	return apiReference;
 }
 
 function closeDetails() {

@@ -519,6 +519,15 @@ function createTree(treeData) {
         $("svg").attr("width", $("#tree-container").width());
     });
 
+    $("#pathModule").click(function(d) {
+        var parentElemTag = "." + d.toElement.textContent
+        var selection = d3.selectAll("g").filter(parentElemTag)
+        var node = selection[0][0].__data__
+        // update(node);
+        centerClick(node);
+        updateDetails(node);
+    })
+
 }
 
 function resetTree() {
