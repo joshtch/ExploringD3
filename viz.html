@@ -34,11 +34,18 @@
 
 <script>
 
+    var d3info;
+
     $(document).ready(function () {
 
-        jsonifyModules("dataset/d3/index.js", createD3Tree, false);
+        init();
 
     });
+
+    async function init() {
+        d3info = await jsonifyModules("dataset/d3/index.js", false);
+        createD3Tree(d3info);
+    }
 
 </script>
 
@@ -95,7 +102,7 @@
             <h3>
 
                 <p>
-                    Use the tree to the left to see what capabilities D3 offers. 
+                    Explore the tree to the left to see what capabilities D3 has to offer. 
                 </p>
 
                 <p>
@@ -130,6 +137,8 @@
             </div>
 
             <div id="dc-code-container"></div>
+
+            <a id="view-example" href="#">Click to view an example</a>
         </div>
 
     </div>

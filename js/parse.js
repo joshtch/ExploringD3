@@ -1,40 +1,45 @@
-function jsonifyModules(file, callback, debug) {
+async function jsonifyModules(file, debug) {
 
-    getFileText(file).then(function(fileText) {
+    var fileText = await getFileText(file);
 
-        var d3 = new Object();
+    var d3 = new Object();
+    var modules = await getModulesInfo(fileText);
 
-        var module_regex = /export {([^\}]*)} from "([^\"]+)";/g;
-        var modules = []
+    d3.name = "d3";
+    d3.children = modules;
+    d3.type = "library";
 
-        processMatches(module_regex, fileText, function(match) {
-            var info = getModuleInfo(match);
-            modules.push(info);
-        });
+    if (debug) {
+        var url = 'data:text/json;charset=utf8,' +
+                  encodeURIComponent(JSON.stringify(d3));
+        window.open(url, '_blank');
+        window.focus();
+    }
 
-        d3.name = "d3";
-        d3.children = modules;
-        d3.type = "library";
-
-        if (debug) {
-            var url = 'data:text/json;charset=utf8,' +
-                      encodeURIComponent(JSON.stringify(d3));
-            window.open(url, '_blank');
-            window.focus();
-        }
-
-        callback(d3);
-
-    }).catch(function(error) {
-        console.log(error.stack);
-    });
+    return d3;
 
 }
 
-function getModuleInfo(module) {
+async function getModulesInfo(fileText) {
+
+    var modules = [];
+    var module_regex = /export {([^\}]*)} from "([^\"]+)";/g;
+
+    while (match = module_regex.exec(fileText)) {
+        var info = await getModuleInfo(match);
+        modules.push(info);
+    }
+
+    return modules;
+
+}
+
+async function getModuleInfo(module) {
 
     var module_body = module[1];
     var module_name = module[2];
+
+    console.log("Loading " + module_name + "...");
 
     var export_regex = /(?:[\s]+)([^,\n]+)/g;
     var exports = []
@@ -52,12 +57,14 @@ function getModuleInfo(module) {
     module_info.name = module_name;
     module_info.type = "module";
     module_info.children = exports;
+    if (module_name != "./build/package")
+        module_info.readme = await getFileText("dataset/d3/node_modules/" + module_name + "/README.md")
 
     return module_info;
 
 }
 
-function processMatches(regex, str, f_match) {
+async function processMatches(regex, str, f_match) {
 
     while (match = regex.exec(str)) {
         if (f_match !== null) f_match(match);

@@ -49,23 +49,11 @@ function populateDetails(d) {
 	if (d.type == "function"){
 		readmeName = d.parent.name
 	}
-	var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
 
-	getReadme(readmePath).then(function(fileHTML) {
-		var parsedReadme = extractReadmePart(fileHTML, d.type, readmeName, d.name)
+	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
 
-		$(DESC).html(parsedReadme);
-
-		var tagSelector
-		/* if(d.type == "function") {
-			tagSelector = 'a[name=' + d.name + ']'
-            $("#dc-description-container").scrollTo(tagSelector);
-		} else {
-			tagSelector = "#" + d.name.replace(/-/g, "")
-            $("#dc-description-container").scrollTop(0);
-		} */
-		
-	});
+    var parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
+    $(DESC).html(parsedReadme);
 
 	updateCode(d);
 }
