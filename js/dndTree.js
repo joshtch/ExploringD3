@@ -54,7 +54,6 @@ function createTree(treeData) {
     // Misc. variables
     var i = 0;
     var duration = 750;
-    var root;
 
 	// size of the entire page
 	var pageWidth = $("#tree-container").width();
@@ -261,7 +260,7 @@ function createTree(treeData) {
 
     // Toggle children function
 	function hasChildren(d) { return d._children ? true : false; }
-	function expanded(d) { return d.children ? true : false; }
+	expanded = function (d) { return d.children ? true : false; }
 
     // return true if the node was closed;
     //        false if the node was opened or selected
@@ -280,7 +279,7 @@ function createTree(treeData) {
 
     }
 
-    function update(source) {
+    update = function (source) {
         // Compute the new height, function counts total children of root node and sets tree height accordingly.
         // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
         // This makes the layout more consistent.
@@ -333,9 +332,7 @@ function createTree(treeData) {
                 return "nodeCircle " + d.name;
             })
             .attr("r", 0)
-            .style("fill", function(d) {
-                return d._children ? "#7f9b66" : d._children ? "#7f9b66" : "#A6D785";
-            });
+            .style("fill", getNodeColor)
 
         nodeEnter.append("text")
             .attr("x", function(d) {
@@ -382,9 +379,7 @@ function createTree(treeData) {
         // Change the circle fill depending on whether it has children and is collapsed
         node.select("circle.nodeCircle")
             .attr("r", 4.5)
-            .style("fill", function(d) {
-                return d._children || d.children ? "#7f9b66" : "#A6D785";
-            });
+            .style("fill", getNodeColor)
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
@@ -500,6 +495,7 @@ function createTree(treeData) {
     root = treeData;
     root.x0 = viewerHeight / 2;
     root.y0 = 0;
+    root._children = root.children;
 
     // Layout the tree initially and center on the root node.
     collapseAllBut(root);
@@ -521,6 +517,15 @@ function createTree(treeData) {
 
 }
 
-function resetTree() {
-    
+function getNodeColor(d) {
+    if (d.search) {
+        console.log("in search", d.name);
+        return "#ffff00";
+    } else if (d.search_children && !expanded(d)) {
+        console.log("not expanded!");
+        return "#ffff00";
+    } else if (d.children || d._children)
+        return "#7f9b66";
+    else 
+        return "#A6D785";
 }

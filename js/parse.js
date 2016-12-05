@@ -10,10 +10,8 @@ async function jsonifyModules(file, debug) {
     d3.type = "library";
 
     if (debug) {
-        var url = 'data:text/json;charset=utf8,' +
-                  encodeURIComponent(JSON.stringify(d3));
-        window.open(url, '_blank');
-        window.focus();
+        printJSON(d3);
+        printExamplesTemplate(d3);
     }
 
     return d3;
@@ -90,4 +88,42 @@ function getFileText(file) {
 
 function notComment(match) {
 	return match.indexOf("// DEPRECATED") != 0;
+}
+
+function printJSON(d3) {
+    var url = 'data:text/json;charset=utf8,' +
+                  encodeURIComponent(JSON.stringify(d3));
+    window.open(url, '_blank');
+    window.focus();
+}
+
+function printExamplesTemplate(d3) {
+    
+    var emptyExamples = new Object();
+    var names = getNames(d3);
+
+    names.forEach(function (name) {
+        emptyExamples[name] = "";
+    });
+
+    var url = 'data:text/json;charset=utf8,' +
+                  encodeURIComponent(JSON.stringify(emptyExamples));
+    window.open(url, '_blank');
+    window.focus();
+}
+
+function getNames(node) {
+
+    if (node.name == "./build/package")
+        return [];
+
+    var names = [node.name];
+    if (node.children) {
+        node.children.forEach(function(child) {
+            names = names.concat(getNames(child));
+        });
+    }
+
+    return names;
+
 }

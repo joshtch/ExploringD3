@@ -60,7 +60,7 @@ function populateDetails(d) {
         while (curr_node.readme == undefined) {
             curr_node = curr_node.parent;
         }
-        var parsedReadme = extractReadmePart(curr_node.readme, d.type, readmeName, d.name)    
+        parsedReadme = extractReadmePart(curr_node.readme, d.type, readmeName, d.name)    
     }
 
     $(DESC).html(parsedReadme);
