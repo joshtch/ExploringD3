@@ -26,6 +26,7 @@
 <script src="https://use.fontawesome.com/d46185390d.js"></script>
 
 <script src="js/parse.js"></script>
+<script src="js/examples.js"></script>
 <script src="js/detailPanel.js"></script>
 <script src="js/pathHighlighting.js"></script>
 <script src="js/refreshTree.js"></script>
@@ -37,6 +38,7 @@
 
     var d3info;
     var root;
+    var examples;
 
     $(document).ready(function () {
 
@@ -47,6 +49,7 @@
     async function init() {
         d3info = await jsonifyModules("dataset/d3/index.js", false);
         createD3Tree(d3info);
+        examples = await getExamples();
     }
 
 </script>
@@ -145,7 +148,7 @@
 
             <div id="dc-code-container"></div>
 
-            <a id="view-example" href="#">Click to view an example</a>
+            <a id="view-example">Click to view an example</a>
         </div>
 
     </div>

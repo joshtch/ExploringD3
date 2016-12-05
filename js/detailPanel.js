@@ -52,6 +52,9 @@ function populateDetails(d) {
 
 	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
 
+    var exampleLink = getExample(d.name);
+    $("#view-example").attr("href", exampleLink);
+
     var parsedReadme;
     if (d.readme)
         parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
