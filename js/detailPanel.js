@@ -35,6 +35,9 @@ function updateDetails (d) {
 
 function populateDetails(d) {
 
+    // default pane is ReadMe
+    $("#toggle-tab").removeClass("show-code");
+
     // show appropriate detail pane for module vs. function
     if (d.type == "module") {
         $("#info-container").addClass("show-module");
@@ -53,7 +56,12 @@ function populateDetails(d) {
 	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
 
     var exampleLink = getExample(d.name);
-    $("#view-example").attr("href", exampleLink);
+    if (exampleLink) {
+        $("#view-example").addClass("show");
+        $("#view-example").attr("href", exampleLink);
+    } else {
+        $("#view-example").removeClass("show");
+    }
 
     var parsedReadme;
     if (d.readme)

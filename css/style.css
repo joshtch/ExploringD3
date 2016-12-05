@@ -140,7 +140,7 @@ font-size:10px;
 }
 
 #info-container .module #dc-description-container {
-    height: calc(100% - 33px);
+    height: 100%
 }
 
 #info-container .module #dc-code-container {
@@ -200,9 +200,14 @@ font-size:10px;
 
 #info-container.show-module #dc-code-container {
     display: none;
-    height: calc(100% - 33px);
+    height: 100%;
     width: 100%;
     z-index: 1;
+}
+
+#view-example.show ~ #info-container.show-module #dc-description-container
+#view-example.show ~ #info-container.show-module #dc-code-container {
+    height: calc(100% - 33px);
 }
 
 #toggle-tab.show-code ~ #dc-description-container {
@@ -214,6 +219,7 @@ font-size:10px;
 }
 
 #view-example {
+    display: none;
     width: 100%;
     background-color: #EEE;
     padding: 5px 30px;
@@ -224,6 +230,10 @@ font-size:10px;
     font-weight: 300;
     z-index: 10;
     text-align: center;
+}
+
+#view-example.show {
+    display: block;
 }
 
 #caption {
@@ -314,10 +324,12 @@ font-size:10px;
 }
 
 #dc-code-container {
-    height:45%;
-    bottom:0px;
-    overflow-y: scroll;
-    background-color: #EEE;
+    height: 50%;
+}
+
+#view-example.show ~ #dc-code-container {
+    height: 45%;
+    bottom: 0px;
 }
 
 #dc-description-container {
@@ -331,11 +343,15 @@ font-size:10px;
     word-wrap: break-word;
     word-break: break-word;
     position: relative;
-    height: calc(100% - 31px);
+    height: 100%;
     padding: 30px;
     font-family: sans-serif;
     font-weight: 300;
     font-size: 14px;
+}
+
+#view-example.show ~ #dc-description-container {
+    height: calc(100% - 31px);
 }
 
 #dc-description h1, h2, h3, h4, p, pre {
