@@ -31,10 +31,12 @@
 <script src="js/refreshTree.js"></script>
 <script src="js/dndTree.js"></script>
 <script src="js/detailCodeBlock.js"></script>
+<script src="js/search.js"></script>
 
 <script>
 
     var d3info;
+    var root;
 
     $(document).ready(function () {
 
@@ -84,9 +86,14 @@
     <div id="tree-container"></div>
 
     <div id="search-container">
-        <input id="search-bar" placeholder="Search">
-        </input>
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <div id="search-bar-container">
+            <input id="search-bar" placeholder="Search">
+            </input>
+            <i id="search-button" class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <div id="search-instr">
+            If a hidden child-node contains the search term, its visible parent is highlighted. If this parent itself does not contain the search term, upon expanding this parent, the parent will reset to its default color.
+        </div>
     </div>
 
     <div id="detail-container" class="panel-resizable show-caption">

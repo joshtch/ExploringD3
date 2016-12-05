@@ -10,10 +10,11 @@ $(document).ready(function () {
     // otherwise, bind the button as necessary
     } else {
 
-        $("#refresh-button").click(function() {
+        $("#refresh-button").click(async function() {
             closeDetails();
             $("#tree-container").empty();
-            jsonifyModules("dataset/d3/index.js", createD3Tree, false);
+            d3info = await jsonifyModules("dataset/d3/index.js", false);
+            createD3Tree(d3info);
         });
 
     }
