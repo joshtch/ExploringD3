@@ -44,13 +44,29 @@ function createTree(treeData) {
 
     //Nodes Visited History
 
-    function moveToNode (nodeName) {
-        var parentElemTag = "." + nodeName;
-        var selection = d3.selectAll("g").filter(parentElemTag)
-        var node = selection[0][0].__data__
-        // update(node);
-        centerClick(node);
-        updateDetails(node);
+    function expandNode(d) {
+        closing = toggleChildren(d);
+        
+        update(d);
+        centerClick(d);
+    }
+
+    function moveToNode (d) {
+        var root = treeData;
+        root.x0 = viewerHeight / 2;
+        root.y0 = 0;
+        root._children = root.children;
+
+        // Layout the tree initially and center on the root node.
+        collapseAllBut(root);
+        
+        if(d.type == "function"){
+            expandNode(d.parent);
+        }
+        expandNode(d);
+        highlight(d);
+
+        updateDetails(d);
     }
 
     nodesVisited = {}
@@ -72,16 +88,14 @@ function createTree(treeData) {
             nodesVisited.setForward();
         }
     }
-    nodesVisited.addNode = function(nodeStr) {
-        nodesVisited.visited.push(nodeStr);
+    nodesVisited.addNode = function(d) {
+        nodesVisited.visited.push(d);
         nodesVisited.currentIndex = nodesVisited.visited.length - 1;
     }
 
     nodesVisited.setBack = function() {
-        console.log("setBack called")
-        console.log(nodesVisited.currentIndex);
         if(nodesVisited.currentIndex > 0){
-            $("#back-id").html(nodesVisited.visited[nodesVisited.currentIndex - 1]);
+            $("#back-id").html(nodesVisited.visited[nodesVisited.currentIndex - 1].name);
         } else {
             $("#back-id").html("")
         }
@@ -89,7 +103,7 @@ function createTree(treeData) {
 
     nodesVisited.setForward = function() {
         if(nodesVisited.currentIndex < nodesVisited.visited.length - 1) {
-            $("#forward-id").html(nodesVisited.visited[nodesVisited.currentIndex + 1]);
+            $("#forward-id").html(nodesVisited.visited[nodesVisited.currentIndex + 1].name);
         } else {
             $("#forward-id").html("")
         }
@@ -281,7 +295,7 @@ function createTree(treeData) {
 
     // Toggle children on click.
     function click(d) {
-        nodesVisited.addNode(d.name);
+        nodesVisited.addNode(d);
         closing = toggleChildren(d);
         closing ? closeDetails() : updateDetails(d);
         update(d);
@@ -302,6 +316,7 @@ function createTree(treeData) {
 
     // close all other children at your level
     function collapseOthers(d) {
+        console.log(d.parent)
         for (var i = 0; i < d.parent.children.length; i++) {
             if (d.parent.children[i] == d)
                 continue;
@@ -344,6 +359,8 @@ function createTree(treeData) {
     }
 
     update = function (source) {
+        console.log("source in update")
+        console.log(source)
         //update the back and forward buttons 
         nodesVisited.setBack();
         nodesVisited.setForward();
