@@ -224,7 +224,9 @@ function createTree(treeData) {
     // center appropriate associated node when a node is clicked
     function centerClick(source) {
 
-        if (!hasChildren(source)) return;
+        // if the node has no children, do not center
+        if (source.children == undefined && source._children == undefined)
+            return;
 
         // else, center the relevant component
         else {
@@ -248,11 +250,7 @@ function createTree(treeData) {
 
             // if we just closed a node, center the nodes on its level
             } else if (source._children != undefined) {
-								if (source.parent != undefined) {
-										to_center = getMiddleChild(source.parent);
-								} else {
-										to_center = source;
-								}
+                to_center = getMiddleChild(source.parent);
                 scale = resetScale();
             }
 
@@ -312,7 +310,7 @@ function createTree(treeData) {
 
 	function expand(d) { 
         d.children = d._children;
-				if (d.parent != undefined) collapseOthers(d);
+        collapseOthers(d);
         highlight(d);
     }
 
@@ -341,7 +339,7 @@ function createTree(treeData) {
 
     // Toggle children function
 	function hasChildren(d) { return d._children ? true : false; }
-	function expanded(d)    { return d.children ? true : false; }
+	expanded = function (d) { return d.children ? true : false; }
 
     // return true if the node was closed;
     //        false if the node was opened or selected
@@ -360,7 +358,7 @@ function createTree(treeData) {
 
     }
 
-    function update(source) {
+    update = function (source) {
         console.log("source in update")
         console.log(source)
         //update the back and forward buttons 
@@ -545,10 +543,11 @@ function createTree(treeData) {
     function collapseAll(node) {
 
         if (node.children) {
+            node._children = node.children;
             node.children = null;
         }
 
-        if (expanded(node)) {
+        if (node._children != undefined) {
 
             for (var i = 0; i < node._children.length; ++i) {
                 collapseAll(node._children[i]);
