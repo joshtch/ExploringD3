@@ -42,15 +42,14 @@
 
     $(document).ready(function () {
 
-        init();
+        jsonifyModules("dataset/d3/index.js", false).then(function (d3info) {
+            d3info = d3info;
+            createD3Tree(d3info);
+        });
+
+        getExamples();
 
     });
-
-    async function init() {
-        d3info = await jsonifyModules("dataset/d3/index.js", false);
-        createD3Tree(d3info);
-        examples = await getExamples();
-    }
 
 </script>
 

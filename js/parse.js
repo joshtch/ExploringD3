@@ -1,38 +1,65 @@
-async function jsonifyModules(file, debug) {
+function jsonifyModules(file, debug) {
 
-    var fileText = await getFileText(file);
+    return new Promise(function(resolve, reject) {
 
-    var d3 = new Object();
-    var modules = await getModulesInfo(fileText);
+        getFileText(file).then(function (fileText) {
 
-    d3.name = "d3";
-    d3.children = modules;
-    d3.type = "library";
+            d3info = new Object();
 
-    if (debug) {
-        printJSON(d3);
-        printExamplesTemplate(d3);
-    }
+            getModulesInfo(fileText).then(function (modules) {
 
-    return d3;
+                console.log(modules);
+
+                d3info.name = "d3";
+                d3info.children = modules;
+                d3info.type = "library";
+
+                if (debug) {
+                    printJSON(d3info);
+                    printExamplesTemplate(d3info);
+                }
+
+                resolve(d3info);
+
+            });
+
+        });
+
+    });
 
 }
 
-async function getModulesInfo(fileText) {
+function getModulesInfo(fileText) {
 
     var modules = [];
     var module_regex = /export {([^\}]*)} from "([^\"]+)";/g;
 
-    while (match = module_regex.exec(fileText)) {
-        var info = await getModuleInfo(match);
-        modules.push(info);
+    var nextPromise = function () {
+
+        var match = module_regex.exec(fileText);
+        if (!match) return;
+
+        var promise = new Promise(function(resolve, reject) {
+
+            getModuleInfo(match).then(function (info) {
+                modules.push(info);
+                console.log(info);
+                resolve();
+            });        
+
+        });
+
+        return promise.then(nextPromise);
+
     }
 
-    return modules;
+    return nextPromise().then(function () {
+        return modules;
+    });
 
 }
 
-async function getModuleInfo(module) {
+function getModuleInfo(module) {
 
     var module_body = module[1];
     var module_name = module[2];
@@ -55,14 +82,22 @@ async function getModuleInfo(module) {
     module_info.name = module_name;
     module_info.type = "module";
     module_info.children = exports;
-    if (module_name != "./build/package")
-        module_info.readme = await getFileText("dataset/d3/node_modules/" + module_name + "/README.md")
 
-    return module_info;
+    return new Promise(function(resolve, reject) {
+
+        if (module_name != "./build/package")
+            getFileText("dataset/d3/node_modules/" + module_name + "/README.md")
+            .then(function(fileText) {
+                module_info.readme = fileText;
+                resolve(module_info);
+            });
+        else resolve(module_info);
+
+    });
 
 }
 
-async function processMatches(regex, str, f_match) {
+function processMatches(regex, str, f_match) {
 
     while (match = regex.exec(str)) {
         if (f_match !== null) f_match(match);
