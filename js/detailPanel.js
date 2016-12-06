@@ -1,7 +1,7 @@
 var txt = "";
 
 $(document).ready(function() {
-    $("#toggle-tab").click(toggleTab);
+    d3.select("#toggle-tab").on("click", toggleTab);
 });
 
 jQuery.fn.scrollTo = function(elem) {
@@ -169,11 +169,8 @@ function getReadme(file) {
 
 function toggleTab() {
 
-    console.log(arguments.callee.caller);
-    console.log(arguments.callee.caller.caller);
-    console.log(arguments.callee.caller.caller.caller);
-
-    $("#toggle-tab").toggleClass("show-code");
+		var tab = d3.select("#toggle-tab");
+		tab.classed("show-code", !tab.classed("show-code"))
 
     var code = "View Code";
     var readme = "View Read Me";
