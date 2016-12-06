@@ -8,8 +8,6 @@ function jsonifyModules(file, debug) {
 
             getModulesInfo(fileText).then(function (modules) {
 
-                console.log(modules);
-
                 d3info.name = "d3";
                 d3info.children = modules;
                 d3info.type = "library";
@@ -43,7 +41,6 @@ function getModulesInfo(fileText) {
 
             getModuleInfo(match).then(function (info) {
                 modules.push(info);
-                console.log(info);
                 resolve();
             });        
 
@@ -81,14 +78,15 @@ function getModuleInfo(module) {
     var module_info = new Object();
     module_info.name = module_name;
     module_info.type = "module";
-    module_info.children = exports;
 
     return new Promise(function(resolve, reject) {
 
         if (module_name != "./build/package")
             getFileText("dataset/d3/node_modules/" + module_name + "/README.md")
             .then(function(fileText) {
-                module_info.readme = fileText;
+                // if (module_name == "d3-quadtree") {
+                module_info.readme = getModuleDesc(module_name, fileText);
+                module_info.children = getFunsInfo(exports, fileText); // }
                 resolve(module_info);
             });
         else resolve(module_info);

@@ -92,7 +92,7 @@ function populateDetails(d) {
         $("#view-example").removeClass("show");
     }
 
-    var parsedReadme;
+    /* var parsedReadme;
     if (d.readme)
         parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
     else {
@@ -101,9 +101,9 @@ function populateDetails(d) {
             curr_node = curr_node.parent;
         }
         parsedReadme = extractReadmePart(curr_node.readme, d.type, readmeName, d.name)    
-    }
+    } */
 
-    $(DESC).html(parsedReadme);
+    $(DESC).html(d.readme);
 
 
 	updateCode(d);
@@ -165,11 +165,6 @@ function getReadme (file) {
 		req.open("GET", file);
 		req.send();
 	});
-}
-
-function parseReadme (readme) {
-	var converter = new showdown.Converter();
-	return converter.makeHtml(readme);
 }
 
 function toggleTab () {
