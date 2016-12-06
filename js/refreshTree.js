@@ -13,8 +13,10 @@ $(document).ready(function () {
         $("#refresh-button").click(async function() {
             closeDetails();
             $("#tree-container").empty();
-            d3info = await jsonifyModules("dataset/d3/index.js", false);
-            createD3Tree(d3info);
+            jsonifyModules("dataset/d3/index.js", false).then(function (d3info) {
+                d3info = d3info;
+                createD3Tree(d3info);
+            });
         });
 
     }
