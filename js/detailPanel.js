@@ -1,5 +1,9 @@
 var txt = "";
 
+$(document).ready(function() {
+    $("#toggle-tab").click(toggleTab);
+});
+
 jQuery.fn.scrollTo = function(elem) {
 	$(this).scrollTop($(this).scrollTop() - $(this).offset().top + $(elem).offset().top);
 	return this;
@@ -15,7 +19,9 @@ $("#parentModule").click(function(d){
 });
 
 function updateDetails (d) {
+	console.log("updateDetails called")
 
+    // transition
     $("#tree-container").addClass("side-panel");
     $("#tree-svg").attr("width", $("#tree-container").width());
     $("#detail-container").addClass("expanded");
@@ -23,41 +29,82 @@ function updateDetails (d) {
     $("#detail-container").addClass("hide-caption");
     setTimeout(function() {
         $("#detail-container").addClass("show-info");
-        //populateDetails(d);
+        populateDetails(d);
     }, 125);
+
+}
+
+function populateDetails(d) {
+	console.log("populateDetails called")
+
+    // default pane is ReadMe
+    $("#toggle-tab").removeClass("show-code");
+
+    // show appropriate detail pane for module vs. function
+    if (d.type == "module") {
+        $("#info-container").addClass("show-module");
+    } else {
+        $("#info-container").removeClass("show-module");
+    }
 
 	var readmeName = d.name;
 	var path = "dataset/d3-core-js/" + readmeName + ".js";
 
 
-	if(d.type == "function"){
+	if (d.type == "function"){
 		readmeName = d.parent.name
 	}
-	var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
 
-	getReadme(readmePath).then(function(fileHTML) {
-		var parsedReadme = extractReadmePart(fileHTML, d.type, readmeName, d.name)
+	// var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
 
-		$(DESC).html(parsedReadme);
+	// getReadme(readmePath).then(function(fileHTML) {
+	// 	var parsedReadme = extractReadmePart(fileHTML, d.type, readmeName, d.name)
 
-		if(d.type == "function"){
-			$("#pathModule").html("<a>" + readmeName.trim() + "</a>");
-			$("#pathFunction").html("/" + d.name);
+	// 	$(DESC).html(parsedReadme);
 
-		} else {
-			$("#pathModule").html(readmeName.trim());
-			$("#pathFunction").html("")
-		}
+	// 	if(d.type == "function"){
+	// 		$("#pathModule").html("<a>" + readmeName.trim() + "</a>");
+	// 		$("#pathFunction").html("/" + d.name);
 
-		// var tagSelector;
-		// if(d.type == "function") {
-		// 	tagSelector = 'a[name=' + d.name + ']'
-		// } else {
-		// 	tagSelector = "#" + d.name.replace(/-/g, "")
-		// }
-		// console.log(tagSelector)
-		$("#dc-description-container").scrollTop(0);
-	})
+	// 	} else {
+	// 		$("#pathModule").html(readmeName.trim());
+	// 		$("#pathFunction").html("")
+	// 	}
+
+	// 	// var tagSelector;
+	// 	// if(d.type == "function") {
+	// 	// 	tagSelector = 'a[name=' + d.name + ']'
+	// 	// } else {
+	// 	// 	tagSelector = "#" + d.name.replace(/-/g, "")
+	// 	// }
+	// 	// console.log(tagSelector)
+	// 	$("#dc-description-container").scrollTop(0);
+	// })
+
+
+	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
+
+    var exampleLink = getExample(d.name);
+    if (exampleLink) {
+        $("#view-example").addClass("show");
+        $("#view-example").attr("href", exampleLink);
+    } else {
+        $("#view-example").removeClass("show");
+    }
+
+    var parsedReadme;
+    if (d.readme)
+        parsedReadme = extractReadmePart(d.readme, d.type, readmeName, d.name)    
+    else {
+        var curr_node = d;
+        while (curr_node.readme == undefined) {
+            curr_node = curr_node.parent;
+        }
+        parsedReadme = extractReadmePart(curr_node.readme, d.type, readmeName, d.name)    
+    }
+
+    $(DESC).html(parsedReadme);
+
 
 	updateCode(d);
 }
@@ -123,4 +170,16 @@ function getReadme (file) {
 function parseReadme (readme) {
 	var converter = new showdown.Converter();
 	return converter.makeHtml(readme);
+}
+
+function toggleTab () {
+
+    $("#toggle-tab").toggleClass("show-code");
+
+    var code = "View Code";
+    var readme = "View Read Me";
+
+    $("#toggle-tab").text() == readme ? $("#toggle-tab").text(code)
+                                      : $("#toggle-tab").text(readme);
+
 }

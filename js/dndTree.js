@@ -42,6 +42,69 @@ function createD3Tree(d3JSON) {
 // Get JSON data
 function createTree(treeData) {
 
+    //Nodes Visited History
+
+    function moveToNode (nodeName) {
+        var parentElemTag = "." + nodeName;
+        var selection = d3.selectAll("g").filter(parentElemTag)
+        var node = selection[0][0].__data__
+        // update(node);
+        centerClick(node);
+        updateDetails(node);
+    }
+
+    nodesVisited = {}
+    nodesVisited.visited = []
+    nodesVisited.currentIndex = -1;
+    nodesVisited.moveBack = function() {
+        if(nodesVisited.currentIndex >= 0){
+            nodesVisited.currentIndex += (-1);
+            moveToNode(nodesVisited.visited[nodesVisited.currentIndex])
+            nodesVisited.setBack();
+            nodesVisited.setForward();
+        }
+    }
+    nodesVisited.moveForward = function() {
+        if(nodesVisited.currentIndex <= nodesVisited.visited.length - 2){
+            nodesVisited.currentIndex += 1;
+            moveToNode(nodesVisited.visited[nodesVisited.currentIndex])
+            nodesVisited.setBack();
+            nodesVisited.setForward();
+        }
+    }
+    nodesVisited.addNode = function(nodeStr) {
+        nodesVisited.visited.push(nodeStr);
+        nodesVisited.currentIndex = nodesVisited.visited.length - 1;
+    }
+
+    nodesVisited.setBack = function() {
+        console.log("setBack called")
+        console.log(nodesVisited.currentIndex);
+        if(nodesVisited.currentIndex > 0){
+            $("#back-id").html(nodesVisited.visited[nodesVisited.currentIndex - 1]);
+        } else {
+            $("#back-id").html("")
+        }
+    }
+
+    nodesVisited.setForward = function() {
+        if(nodesVisited.currentIndex < nodesVisited.visited.length - 1) {
+            $("#forward-id").html(nodesVisited.visited[nodesVisited.currentIndex + 1]);
+        } else {
+            $("#forward-id").html("")
+        }
+    }
+
+    $("#back-id").click(function () {
+        nodesVisited.moveBack();
+    });
+
+    $("#forward-id").click(function () {
+        nodesVisited.moveForward();
+    })
+
+
+
     // Calculate total nodes, max label length
     var totalNodes = 0;
     var maxLabelLength = 0;
@@ -54,7 +117,6 @@ function createTree(treeData) {
     // Misc. variables
     var i = 0;
     var duration = 750;
-    var root;
 
 	// size of the entire page
 	var pageWidth = $("#tree-container").width();
@@ -219,6 +281,7 @@ function createTree(treeData) {
 
     // Toggle children on click.
     function click(d) {
+        nodesVisited.addNode(d.name);
         closing = toggleChildren(d);
         closing ? closeDetails() : updateDetails(d);
         update(d);
@@ -261,7 +324,7 @@ function createTree(treeData) {
 
     // Toggle children function
 	function hasChildren(d) { return d._children ? true : false; }
-	function expanded(d) { return d.children ? true : false; }
+	expanded = function (d) { return d.children ? true : false; }
 
     // return true if the node was closed;
     //        false if the node was opened or selected
@@ -280,7 +343,11 @@ function createTree(treeData) {
 
     }
 
-    function update(source) {
+    update = function (source) {
+        //update the back and forward buttons 
+        nodesVisited.setBack();
+        nodesVisited.setForward();
+
         // Compute the new height, function counts total children of root node and sets tree height accordingly.
         // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
         // This makes the layout more consistent.
@@ -333,9 +400,7 @@ function createTree(treeData) {
                 return "nodeCircle " + d.name;
             })
             .attr("r", 0)
-            .style("fill", function(d) {
-                return d._children ? "#7f9b66" : d._children ? "#7f9b66" : "#A6D785";
-            });
+            .style("fill", getNodeColor)
 
         nodeEnter.append("text")
             .attr("x", function(d) {
@@ -382,9 +447,7 @@ function createTree(treeData) {
         // Change the circle fill depending on whether it has children and is collapsed
         node.select("circle.nodeCircle")
             .attr("r", 4.5)
-            .style("fill", function(d) {
-                return d._children || d.children ? "#7f9b66" : "#A6D785";
-            });
+            .style("fill", getNodeColor)
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
@@ -500,6 +563,7 @@ function createTree(treeData) {
     root = treeData;
     root.x0 = viewerHeight / 2;
     root.y0 = 0;
+    root._children = root.children;
 
     // Layout the tree initially and center on the root node.
     collapseAllBut(root);
@@ -526,10 +590,19 @@ function createTree(treeData) {
         // update(node);
         centerClick(node);
         updateDetails(node);
-    })
+    });
 
 }
 
-function resetTree() {
-    
+function getNodeColor(d) {
+    if (d.search) {
+        console.log("in search", d.name);
+        return "#ffff00";
+    } else if (d.search_children && !expanded(d)) {
+        console.log("not expanded!");
+        return "#ffff00";
+    } else if (d.children || d._children)
+        return "#7f9b66";
+    else 
+        return "#A6D785";
 }

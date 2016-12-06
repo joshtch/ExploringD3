@@ -19,10 +19,11 @@ function configureEditor(editor) {
 		editor.setTheme("ace/theme/dawn");
 		editor.getSession().setMode("ace/mode/javascript");
 		editor.setHighlightActiveLine(false);
-		editor.setShowPrintMargin(false);
+		editor.setShowPrintMargin(true);
 		editor.setReadOnly(true);
 		editor.renderer.$cursorLayer.element.style.display = "none";
 		editor.renderer.setShowGutter(false);
+		// editor.getSession().setUseWorker(false);
 		editor.$blockScrolling = Infinity;
 		editor.resize(true);
 }

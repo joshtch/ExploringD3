@@ -26,19 +26,32 @@
 <script src="https://use.fontawesome.com/d46185390d.js"></script>
 
 <script src="js/parse.js"></script>
+<script src="js/examples.js"></script>
+<script src="js/detailPanel.js"></script>
 <script src="js/pathHighlighting.js"></script>
 <script src="js/refreshTree.js"></script>
 <script src="js/dndTree.js"></script>
 <script src="js/detailPanel.js"></script>
 <script src="js/detailCodeBlock.js"></script>
+<script src="js/search.js"></script>
 
 <script>
 
+    var d3info;
+    var root;
+    var examples;
+
     $(document).ready(function () {
 
-        jsonifyModules("dataset/d3/index.js", createD3Tree, false);
+        init();
 
     });
+
+    async function init() {
+        d3info = await jsonifyModules("dataset/d3/index.js", false);
+        createD3Tree(d3info);
+        examples = await getExamples();
+    }
 
 </script>
 
@@ -64,25 +77,39 @@
 
     <div id="button-container">
 
-        <div id="reset-button">
+        <div id="reset-button" class="button">
             Reset Tree
         </div>
 
-        <div id="refresh-button">
+        <div id="refresh-button" class="button">
             Refresh Tree
         </div>
 
+    </div>
+    <div id="back-button-container">
+        <div id="back-button" class="nav-button">
+            <- <span id="back-id"></span>
+        </div>
+
+        <div id="forward-button" class="nav-button">
+            <span id="forward-id"></span> ->
+        </div>
     </div>
 
     <div id="tree-container"></div>
 
     <div id="search-container">
-        <input id="search-bar" placeholder="Search">
-        </input>
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <div id="search-bar-container">
+            <input id="search-bar" placeholder="Search">
+            </input>
+            <i id="search-button" class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <div id="search-instr">
+            If a hidden child-node contains the search term, its visible parent is highlighted. If this parent itself does not contain the search term, upon expanding this parent, the parent will reset to its default color.
+        </div>
     </div>
 
-    <div id="detail-container" class="panel-body panel-resizable show-caption">
+    <div id="detail-container" class="panel-resizable show-caption">
 
         <div id="caption">
 
@@ -95,7 +122,7 @@
             <h3>
 
                 <p>
-                    Use the tree to the left to see what capabilities D3 offers. 
+                    Explore the tree to the left to see what capabilities D3 has to offer. 
                 </p>
 
                 <p>
@@ -123,14 +150,17 @@
         <!-- <h1 id="dc-title"></h1> -->
         <div id="info-container">
 
+            <a id="view-example" target="_blank">Click to view an example</a>
+
+            <div id="toggle-tab" class="button">View Code</div>
+
             <div id="dc-description-container">
                 <h3><span id="pathModule"></span><span id="pathFunction"></span></h3>
               <p><pre id="dc-description"></pre></p>
             </div>
 
-            <hr/>
-
             <div id="dc-code-container"></div>
+
         </div>
 
     </div>

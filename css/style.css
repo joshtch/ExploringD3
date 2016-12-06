@@ -92,7 +92,6 @@ font-size:10px;
     width: calc(20% + 40px);
     z-index: 10;
     background-color: #EEE;
-    padding: 20px;
     border: solid 1px gray;
     -webkit-transition: width 0.25s ease-in-out;
     -moz-transition: width 0.25s ease-in-out;
@@ -111,6 +110,7 @@ font-size:10px;
 #detail-container #caption {
     display: block;
     opacity: 0;
+    padding: 20px;
 }
 
 #detail-container.show-caption #caption {
@@ -131,6 +131,22 @@ font-size:10px;
     opacity: 0;
 }
 
+/* info container layout for display a function */
+
+#info-container #dc-description-container,
+#info-container #dc-code-container {
+    border: solid 1px #A8A8A8;
+    overflow: hidden;
+}
+
+#info-container .module #dc-description-container {
+    height: 100%
+}
+
+#info-container .module #dc-code-container {
+    display: none;
+}
+
 #detail-container.expanded #info-container {
     display: block;
 }
@@ -141,6 +157,83 @@ font-size:10px;
     -moz-transition: opacity 0.5s ease-in-out;
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
+}
+
+#info-container #toggle-tab {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    margin: 0;
+    display: none;
+    border: none;
+    background-color: #337ab7;
+    color: white;
+    z-index: 10;
+    opacity: 0.25;
+}
+
+#info-container #toggle-tab:hover {
+    opacity: 1.0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* info container layout for display a module function */
+
+#info-container.show-module #dc-description-container,
+#info-container.show-module #dc-code-container {
+    position: relative;
+    border: none;
+    overflow: hidden;
+}
+
+#info-container.show-module #toggle-tab {
+    width: auto;
+    display: inline-block;
+}
+
+#info-container.show-module #dc-description-container {
+    height: 100%;
+}
+
+#info-container.show-module #dc-code-container {
+    display: none;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#view-example.show ~ #info-container.show-module #dc-description-container
+#view-example.show ~ #info-container.show-module #dc-code-container {
+    height: calc(100% - 33px);
+}
+
+#toggle-tab.show-code ~ #dc-description-container {
+    display: none;
+}
+
+#toggle-tab.show-code ~ #dc-code-container {
+    display: block;
+}
+
+#view-example {
+    display: none;
+    width: 100%;
+    background-color: #EEE;
+    padding: 5px 30px;
+    position: absolute;
+    bottom: 0%;
+    border-top: solid 1px gray;
+    font-size: 14px;
+    font-weight: 300;
+    z-index: 10;
+    text-align: center;
+}
+
+#view-example.show {
+    display: block;
 }
 
 #caption {
@@ -156,6 +249,7 @@ font-size:10px;
     height: 100%;
     width: 100%;
     opacity: 1;
+    padding: 20px;
 }
 
 #caption h1 {
@@ -170,6 +264,10 @@ font-size:10px;
     margin: 20px 0;
     color: gray;
     line-height: 1.5;
+}
+
+#caption h3 p {
+    margin-bottom: 10px;
 }
 
 #caption h5,
@@ -197,8 +295,8 @@ font-size:10px;
     z-index: 10;
 }
 
-#reset-button,
-#refresh-button {
+
+.button {
     display: inline-block;
     position: relative;
     width: 80px;
@@ -216,10 +314,29 @@ font-size:10px;
     margin-left: 15px;
 }
 
-#reset-button:hover,
-#refresh-button:hover {
+.button:hover {
     color: #484848;
     border-color: #484848;
+}
+
+#back-button-container {
+    position: fixed;
+    right: 30px;
+    top: -5px;
+    z-index: 100;
+}
+
+.nav-button {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    font-size: 10px;
+    color: gray;
+    cursor: pointer;
 }
 
 #dc-code-text {
@@ -228,21 +345,50 @@ font-size:10px;
 }
 
 #dc-code-container {
-    height:45%;
-    /*max-height: 400px;*/
-    bottom:0px;
-    overflow-y: scroll;
+    height: 50%;
+}
+
+#view-example.show ~ #dc-code-container {
+    height: 45%;
+    bottom: 0px;
 }
 
 #dc-description-container {
-    height:50%;
-    max-height: 400px;
+    height: 50%;
     overflow-y: scroll;
 }
 
 #dc-description {
+    background-color: #EEE;
+    border: none;
     word-wrap: break-word;
     word-break: break-word;
+    position: relative;
+    height: 100%;
+    padding: 30px;
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+#view-example.show ~ #dc-description-container {
+    height: calc(100% - 31px);
+}
+
+#dc-description h1, h2, h3, h4, p, pre {
+    margin: 0;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+#dc-description h1 {
+    margin-top: 0px;
 }
 
 #dc-description p {
@@ -254,7 +400,7 @@ font-size:10px;
     top: 30px;
     left: 30px;
     z-index: 10;
-    width: 15%;
+    width: 100%;
 }
 
 #search-bar {
@@ -268,7 +414,7 @@ font-size:10px;
     color: gray;
 }
 
-#search-bar + .fa-search {
+#search-bar + i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -279,6 +425,20 @@ font-size:10px;
     cursor: pointer;
 }
 
-#search-bar + .fa-search:hover {
+#search-bar + i:hover {
+    color: gray;
+}
+
+#search-instr,
+#search-bar-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 15%;
+}
+
+#search-instr {
+    display: none;
+    position: relative;
+    font-size: 12px;
     color: gray;
 }
