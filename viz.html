@@ -44,8 +44,8 @@
 
     $(document).ready(function () {
 
-        jsonifyModules("dataset/d3/index.js", false).then(function (d3info) {
-            d3info = d3info;
+        getFileText("d3.json").then(function(d3) {
+            d3info = jQuery.parseJSON(d3);
             createD3Tree(d3info);
         });
 
@@ -88,11 +88,11 @@
     </div>
     <div id="back-button-container">
         <div id="back-button" class="nav-button">
-            <- <span id="back-id"></span>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> <span id="back-id"></span>
         </div>
 
         <div id="forward-button" class="nav-button">
-            <span id="forward-id"></span> ->
+            <span id="forward-id"></span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
     </div>
 
