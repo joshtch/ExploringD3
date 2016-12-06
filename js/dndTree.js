@@ -42,6 +42,69 @@ function createD3Tree(d3JSON) {
 // Get JSON data
 function createTree(treeData) {
 
+    //Nodes Visited History
+
+    function moveToNode (nodeName) {
+        var parentElemTag = "." + nodeName;
+        var selection = d3.selectAll("g").filter(parentElemTag)
+        var node = selection[0][0].__data__
+        // update(node);
+        centerClick(node);
+        updateDetails(node);
+    }
+
+    nodesVisited = {}
+    nodesVisited.visited = []
+    nodesVisited.currentIndex = -1;
+    nodesVisited.moveBack = function() {
+        if(nodesVisited.currentIndex >= 0){
+            nodesVisited.currentIndex += (-1);
+            moveToNode(nodesVisited.visited[nodesVisited.currentIndex])
+            nodesVisited.setBack();
+            nodesVisited.setForward();
+        }
+    }
+    nodesVisited.moveForward = function() {
+        if(nodesVisited.currentIndex <= nodesVisited.visited.length - 2){
+            nodesVisited.currentIndex += 1;
+            moveToNode(nodesVisited.visited[nodesVisited.currentIndex])
+            nodesVisited.setBack();
+            nodesVisited.setForward();
+        }
+    }
+    nodesVisited.addNode = function(nodeStr) {
+        nodesVisited.visited.push(nodeStr);
+        nodesVisited.currentIndex = nodesVisited.visited.length - 1;
+    }
+
+    nodesVisited.setBack = function() {
+        console.log("setBack called")
+        console.log(nodesVisited.currentIndex);
+        if(nodesVisited.currentIndex > 0){
+            $("#back-id").html(nodesVisited.visited[nodesVisited.currentIndex - 1]);
+        } else {
+            $("#back-id").html("")
+        }
+    }
+
+    nodesVisited.setForward = function() {
+        if(nodesVisited.currentIndex < nodesVisited.visited.length - 1) {
+            $("#forward-id").html(nodesVisited.visited[nodesVisited.currentIndex + 1]);
+        } else {
+            $("#forward-id").html("")
+        }
+    }
+
+    $("#back-id").click(function () {
+        nodesVisited.moveBack();
+    });
+
+    $("#forward-id").click(function () {
+        nodesVisited.moveForward();
+    })
+
+
+
     // Calculate total nodes, max label length
     var totalNodes = 0;
     var maxLabelLength = 0;
@@ -218,6 +281,7 @@ function createTree(treeData) {
 
     // Toggle children on click.
     function click(d) {
+        nodesVisited.addNode(d.name);
         closing = toggleChildren(d);
         closing ? closeDetails() : updateDetails(d);
         update(d);
@@ -280,6 +344,10 @@ function createTree(treeData) {
     }
 
     update = function (source) {
+        //update the back and forward buttons 
+        nodesVisited.setBack();
+        nodesVisited.setForward();
+
         // Compute the new height, function counts total children of root node and sets tree height accordingly.
         // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
         // This makes the layout more consistent.
@@ -513,6 +581,15 @@ function createTree(treeData) {
     $(window).resize(function() {
         $("svg").attr("height", $("#tree-container").height());
         $("svg").attr("width", $("#tree-container").width());
+    });
+
+    $("#pathModule").click(function(d) {
+        var parentElemTag = "." + d.toElement.textContent
+        var selection = d3.selectAll("g").filter(parentElemTag)
+        var node = selection[0][0].__data__
+        // update(node);
+        centerClick(node);
+        updateDetails(node);
     });
 
 }

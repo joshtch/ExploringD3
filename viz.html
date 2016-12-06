@@ -31,6 +31,7 @@
 <script src="js/pathHighlighting.js"></script>
 <script src="js/refreshTree.js"></script>
 <script src="js/dndTree.js"></script>
+<script src="js/detailPanel.js"></script>
 <script src="js/detailCodeBlock.js"></script>
 <script src="js/search.js"></script>
 
@@ -83,6 +84,15 @@
             Refresh Tree
         </div>
 
+    </div>
+    <div id="back-button-container">
+        <div id="back-button" class="nav-button">
+            <- <span id="back-id"></span>
+        </div>
+
+        <div id="forward-button" class="nav-button">
+            <span id="forward-id"></span> ->
+        </div>
     </div>
 
     <div id="tree-container"></div>
@@ -144,6 +154,7 @@
             <div id="toggle-tab" class="button">View Code</div>
 
             <div id="dc-description-container">
+                <h3><span id="pathModule"></span><span id="pathFunction"></span></h3>
               <p><pre id="dc-description"></pre></p>
             </div>
 

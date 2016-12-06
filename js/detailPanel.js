@@ -19,6 +19,7 @@ $("#parentModule").click(function(d){
 });
 
 function updateDetails (d) {
+	console.log("updateDetails called")
 
     // transition
     $("#tree-container").addClass("side-panel");
@@ -34,6 +35,7 @@ function updateDetails (d) {
 }
 
 function populateDetails(d) {
+	console.log("populateDetails called")
 
     // default pane is ReadMe
     $("#toggle-tab").removeClass("show-code");
@@ -52,6 +54,33 @@ function populateDetails(d) {
 	if (d.type == "function"){
 		readmeName = d.parent.name
 	}
+
+	// var readmePath = "https://raw.githubusercontent.com/d3/" + readmeName + "/master/README.md"
+
+	// getReadme(readmePath).then(function(fileHTML) {
+	// 	var parsedReadme = extractReadmePart(fileHTML, d.type, readmeName, d.name)
+
+	// 	$(DESC).html(parsedReadme);
+
+	// 	if(d.type == "function"){
+	// 		$("#pathModule").html("<a>" + readmeName.trim() + "</a>");
+	// 		$("#pathFunction").html("/" + d.name);
+
+	// 	} else {
+	// 		$("#pathModule").html(readmeName.trim());
+	// 		$("#pathFunction").html("")
+	// 	}
+
+	// 	// var tagSelector;
+	// 	// if(d.type == "function") {
+	// 	// 	tagSelector = 'a[name=' + d.name + ']'
+	// 	// } else {
+	// 	// 	tagSelector = "#" + d.name.replace(/-/g, "")
+	// 	// }
+	// 	// console.log(tagSelector)
+	// 	$("#dc-description-container").scrollTop(0);
+	// })
+
 
 	var readmePath = "dataset/d3/node_modules/" + readmeName + "/README.md"
 
@@ -75,6 +104,7 @@ function populateDetails(d) {
     }
 
     $(DESC).html(parsedReadme);
+
 
 	updateCode(d);
 }
@@ -104,12 +134,8 @@ function extractReadmePart(readme, fileType, moduleName, functionName) {
 
 	
 
-	var head = '<h3><a id="parentModule">' + moduleName.trim() + '</a>/' + functionName.trim() + '</h3><hr/>'
-	return head + apiReference;
-}
-
-function dummy () {
-	console.log("h");
+	// var head = '<h3><a id="parentModule">' + moduleName.trim() + '</a>/' + functionName.trim() + '</h3><hr/>'
+	return apiReference;
 }
 
 function closeDetails() {
