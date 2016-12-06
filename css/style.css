@@ -372,6 +372,10 @@ font-size:10px;
 }
 
 #view-example.show ~ #dc-description-container {
+    height: 50%;
+}
+
+#info-container.show-module #view-example.show ~ #dc-description-container {
     height: calc(100% - 31px);
 }
 

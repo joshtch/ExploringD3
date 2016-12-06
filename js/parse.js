@@ -84,7 +84,7 @@ function getModuleInfo(module) {
         if (module_name != "./build/package")
             getFileText("dataset/d3/node_modules/" + module_name + "/README.md")
             .then(function(fileText) {
-                // if (module_name == "d3-quadtree") {
+                // if (module_name == "d3-color") {
                 module_info.readme = getModuleDesc(module_name, fileText);
                 module_info.children = getFunsInfo(exports, fileText); // }
                 resolve(module_info);

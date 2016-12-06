@@ -152,7 +152,7 @@ function closeDetails() {
     }, 125);
 }
 
-function getReadme (file) {
+function getReadme(file) {
 	console.log("getReadme called")
 	return new Promise(function(resolve, reject) {
 		var req = new XMLHttpRequest();
@@ -167,7 +167,11 @@ function getReadme (file) {
 	});
 }
 
-function toggleTab () {
+function toggleTab() {
+
+    console.log(arguments.callee.caller);
+    console.log(arguments.callee.caller.caller);
+    console.log(arguments.callee.caller.caller.caller);
 
     $("#toggle-tab").toggleClass("show-code");
 

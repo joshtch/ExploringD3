@@ -63,85 +63,70 @@ function getModuleFunDescs (readme) {
 
             // there is a header; save it
             header = html.substring(0, html.lastIndexOf("<p>", html.indexOf(function_start)));
-
-            // console.log("header", header);
             
         }
 
-        html = html.substring(html.indexOf("d3", html.indexOf(function_start)));
-
-        // console.log("HTML Excerpt: ", html.substring(0, 40));
-
-        // find the next function and save its text up until the next function, header, or end of file --- whichever comes first
-    
-        // console.log(html);
+        // html = html.substring(html.indexOf("d3", html.indexOf(function_start)));
+        html = html.substring(html.lastIndexOf("<p>", html.indexOf(function_start)));
 
         var start_i = 0;
         var fun_regex = /<b>([^\<]+)/;
         var curr_fun = fun_regex.exec(html)[1];
-        // console.log(curr_fun);
-
-        // if (curr_fun == "max")
-            // console.log(html);
+        var curr_fun_start = html.indexOf(function_start);
 
         var next_fun_init;
-        next_fun_init = html.indexOf(function_start);
-        // console.log(next_fun_init);
+        next_fun_init = html.indexOf(function_start, curr_fun_start + 1);
         var next_fun = html.lastIndexOf("<p>", next_fun_init);
-        // console.log(next_fun);
         var next_header = html.indexOf(header_start);
-        // console.log(next_header);
 
-        var end_i;
+        function setFunInfo (fun, info) {
+            if (!funDescs[fun])
+                funDescs[fun] = info;
+        }
+
         if (next_fun_init == -1) {
-            funDescs[curr_fun] = header + html;
+            setFunInfo(curr_fun, header + html);
             break;
         } else if (next_fun_init != -1 && (next_header == -1 || next_fun < next_header)) {
-            funDescs[curr_fun] = header + html.substring(start_i, next_fun);
-            //console.log("CURR FUN: ", html.substring(start_i, next_fun));
-            // console.log("html", html);
-            html = html.substring(next_fun + 3);
+
+            if (next_fun != 0 && next_fun != -1) {
+
+                setFunInfo(curr_fun, header + html.substring(start_i, next_fun));
+                html = html.substring(next_fun);
+
+            } else {
+
+                next_fun = html.lastIndexOf("<a", next_fun_init);
+
+                // now gather the relevant text to fill
+                var curr_next_fun = next_fun_init;
+                var index_p = html.lastIndexOf("<p>", curr_next_fun);
+                while (index_p == 0 || index_p == -1) {
+                    curr_next_fun = html.indexOf(function_start, curr_next_fun + 1);
+                    if (curr_next_fun == -1)
+                        break;
+                    index_p = html.lastIndexOf("<p>", curr_next_fun);
+                }
+
+                if (curr_next_fun != - 1)
+                    setFunInfo(curr_fun, header + html.substring(start_i, index_p));
+                else 
+                    setFunInfo(curr_fun, header + html.substring(start_i));
+
+                html = html.substring(next_fun);
+
+            }
+
         } else {
-            // console.log(next_header, next_fun_init);
-            // console.log("curr header: ", html.substring(start_i, next_header));
+
             funDescs[curr_fun] = header + html.substring(start_i, next_header);
             html = html.substring(next_header);
         }
-    }
 
-    // console.log(funDescs);
+    }
 
     return funDescs;
 
-
-    // if there is a heading, gather it
-
-
-    // console.log(html);
-
-    /*
-
-    // first extract portion until API Reference title
-    var descriptionStart = '#</a> d3.<b>' + functionName.trim();
-    var apiReferenceStartInd = html.search(descriptionStart);
-
-
-    var parsed_readme = readme.substring(readme.indexOf("## API Reference") + 16);
-
-    // eliminate any bullet points after that
-
-
-    return htmlReadMe(parsed_readme);
-
-    var html = htmlReadMe(readme);
-    var descriptionStart = '#</a> d3.<b>' + functionName.trim();
-    var apiReferenceStartInd = html.search(descriptionStart);
-
-    var apiReference = html.slice(apiReferenceStartInd);
-    var apiReferenceEndInd = apiReference.indexOf('<h2', 1);
-    apiReference = apiReference.slice(0, apiReferenceEndInd);
-
-    return apiReference; */
 }
 
 function getFunsInfo (funs, readme) {
