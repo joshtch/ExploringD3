@@ -16,7 +16,7 @@ function updateCode(d) {
 }
 
 function configureEditor(editor) {
-		editor.setTheme("ace/theme/dawn");
+		editor.setTheme("ace/theme/iplastic");
 		editor.getSession().setMode("ace/mode/javascript");
 		editor.setHighlightActiveLine(false);
 		editor.setShowPrintMargin(true);
