@@ -19,7 +19,7 @@ $("#parentModule").click(function(d){
 });
 
 function updateDetails (d) {
-	console.log("updateDetails called")
+	// console.log("updateDetails called")
 
     // transition
     $("#tree-container").addClass("side-panel");
@@ -27,15 +27,21 @@ function updateDetails (d) {
     $("#detail-container").addClass("expanded");
     $("#detail-container").removeClass("show-caption");
     $("#detail-container").addClass("hide-caption");
+    //change position of back buttons
+    // $("#back-button-container").css("width", $("#detail-container").css("width"));
     setTimeout(function() {
         $("#detail-container").addClass("show-info");
         populateDetails(d);
     }, 125);
 
+    setTimeout(function() {
+    	$("#back-button-container").css("width", $("#detail-container").css("width"));
+    }, 250);
+
 }
 
 function populateDetails(d) {
-	console.log("populateDetails called")
+	// console.log("populateDetails called")
 
     // default pane is ReadMe
     $("#toggle-tab").removeClass("show-code");
@@ -150,6 +156,10 @@ function closeDetails() {
             $("#detail-container").addClass("show-caption");
         }, 0);
     }, 125);
+
+    setTimeout(function() {
+    	$("#back-button-container").css("width", $("#detail-container").css("width"));
+    }, 300);
 }
 
 function getReadme(file) {

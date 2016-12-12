@@ -72,7 +72,11 @@ function createTree(treeData) {
     nodesVisited = {}
     nodesVisited.visited = []
     nodesVisited.currentIndex = -1;
-    nodesVisited.moveBack = function() {
+    nodesVisited.moveBack = function(index_reset) {
+        
+        if(typeof index_reset !== 'undefined'){
+            nodesVisited.currentIndex = index_reset + 1;
+        }
         if(nodesVisited.currentIndex >= 0){
             nodesVisited.currentIndex += (-1);
             moveToNode(nodesVisited.visited[nodesVisited.currentIndex])
@@ -90,18 +94,33 @@ function createTree(treeData) {
     }
     nodesVisited.addNode = function(d) {
         nodesVisited.visited.push(d);
+        // console.log(d)
         nodesVisited.currentIndex = nodesVisited.visited.length - 1;
     }
 
     nodesVisited.setBack = function() {
         if(nodesVisited.currentIndex > 0){
             $("#back-id").html(nodesVisited.visited[nodesVisited.currentIndex - 1].name);
+            var back_list_str = ""
+            var back_list_max = 8;
+            var back_list_counter = nodesVisited.currentIndex - 2;
+            while(back_list_counter >= 0 && nodesVisited.currentIndex - 10 < back_list_counter) {
+                d_id = 'dropdown_' + back_list_counter;
+                back_list_str += "<li><a href='javascript:;' onclick='nodesVisited.moveBack(" 
+                                 + back_list_counter + ")'>" 
+                                 + nodesVisited.visited[back_list_counter].name 
+                                 + "</a></span></li>"
+                back_list_counter += -1;
+            }
+            $("#back-button-dropdown").html(back_list_str);
+
         } else {
             $("#back-id").html("")
         }
     }
 
     nodesVisited.setForward = function() {
+        // console.log("setForward called")
         if(nodesVisited.currentIndex < nodesVisited.visited.length - 1) {
             $("#forward-id").html(nodesVisited.visited[nodesVisited.currentIndex + 1].name);
         } else {
@@ -316,7 +335,7 @@ function createTree(treeData) {
 
     // close all other children at your level
     function collapseOthers(d) {
-        console.log(d.parent)
+        // console.log(d.parent)
         for (var i = 0; i < d.parent.children.length; i++) {
             if (d.parent.children[i] == d)
                 continue;
@@ -359,8 +378,8 @@ function createTree(treeData) {
     }
 
     update = function (source) {
-        console.log("source in update")
-        console.log(source)
+        // console.log("source in update")
+        // console.log(source)
         //update the back and forward buttons 
         nodesVisited.setBack();
         nodesVisited.setForward();

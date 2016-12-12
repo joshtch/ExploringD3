@@ -86,7 +86,7 @@ font-size:10px;
 
 #detail-container {
     position: absolute;
-    top: 30px;
+    top: 60px;
     right: 30px;
     height: calc(100% - 70px);
     width: calc(20% + 40px);
@@ -322,8 +322,18 @@ font-size:10px;
 #back-button-container {
     position: fixed;
     right: 30px;
-    top: -5px;
+    top: 10px;
     z-index: 100;
+    width: calc(20% + 40px);
+}
+
+#back-button {
+    position: relative;
+    left: 0px;
+}
+#forward-button {
+    position: absolute;
+    right:0px;
 }
 
 .nav-button {
