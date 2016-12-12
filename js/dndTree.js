@@ -261,8 +261,8 @@ function createTree(treeData) {
     }
 
     function resetScale() {
-        new_scale = zoomListener.scale() / curr_scale;
-        curr_scale = 1;
+        new_scale = zoomListener.scale() / curr_scale * start_scale;
+        curr_scale = start_scale;
         return new_scale;
     }
 
@@ -581,6 +581,26 @@ function createTree(treeData) {
     root.x0 = viewerHeight / 2;
     root.y0 = 0;
     root._children = root.children;
+
+    var start_scale = initScale();
+
+    function initScale() {
+
+        if (root.children != undefined) {
+
+            num_children = root.children.length;
+            children_height = num_children * (25 * curr_scale);
+
+            if (children_height > viewerHeight) {
+                adjust = (children_height / viewerHeight) * 1.1;
+                return 1.0 / adjust;
+            }
+
+        }
+
+        return 1.0;
+
+    }
 
     // Layout the tree initially and center on the root node.
     collapseAllBut(root);
