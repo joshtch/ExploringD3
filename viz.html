@@ -51,11 +51,41 @@
 
         getExamples();
 
+        $("#scroll-down").click(function() {
+            $('html, body').animate({
+                scrollTop: $("#viz").offset().top
+            }, 1000);
+        });
+
     });
 
 </script>
 
 <body>
+
+    <div id="intro-container">
+        <div id="intro">
+            <h1>
+                Exploring D3
+            </h1>
+            <p>
+                D3 is a complex library. With over 300 different functions, the scope of D3's functionality &mdash; and capabilities &mdash; is hard to grasp. While there exists a variety of documentation for D3 online, there is no resource that allows the user to simply explore the library without having to scroll through walls of text. D3Viz is our solution.
+            </p>
+            <p>
+                D3Viz displays the D3 library as a tree to allow users to quickly view or explore aspects of the library that they are interested in. Functions that belong in the same module of D3 are grouped to allow for ease of exploration. If the user is trying to look for a particular function or capability, they can search the tree. And, in limited instances, there are also code examples for modules and functions.
+            </p>
+        </div>
+        <div id="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/9dheZHuPSAo" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="scroll-down">
+            Scroll down to view D3Viz<br>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <!-- <div id="gradient">
+    </div> -->
 
     <!-- <div id="key" style="position: fixed; top: 20px; left: 20px; width: 200px; z-index: 10;">
 
@@ -75,91 +105,95 @@
 
     </div> -->
 
-    <div id="button-container">
+    <div id="viz">
 
-        <div id="reset-button" class="button">
-            Reset Tree
-        </div>
+        <div id="button-container">
 
-        <div id="refresh-button" class="button">
-            Refresh Tree
-        </div>
-
-    </div>
-    <div id="back-button-container">
-        <div id="back-button" class="nav-button">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i> <span id="back-id"></span>
-        </div>
-
-        <div id="forward-button" class="nav-button">
-            <span id="forward-id"></span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </div>
-    </div>
-
-    <div id="tree-container"></div>
-
-    <div id="search-container">
-        <div id="search-bar-container">
-            <input id="search-bar" placeholder="Search">
-            </input>
-            <i id="search-button" class="fa fa-search" aria-hidden="true"></i>
-        </div>
-        <div id="search-instr">
-            If a hidden child-node contains the search term, its visible parent is highlighted. If this parent itself does not contain the search term, upon expanding this parent, the parent will reset to its default color.
-        </div>
-    </div>
-
-    <div id="detail-container" class="panel-resizable show-caption">
-
-        <div id="caption">
-
-            <h1>
-                <i>Let's explore D3!</i>
-            </h1>
-
-            <hr>
-
-            <h3>
-
-                <p>
-                    Explore the tree to the left to see what capabilities D3 has to offer. 
-                </p>
-
-                <p>
-                    To interact with the tree, just click to expand a node. Click the node again to shrink the node.
-                </p>
-
-                <p>
-                    And, to zoom in on the visualization, scroll up; to zoom out, scroll down.
-                </p>
-
-                <p>
-                    <i>Have fun!</i>
-                </p>
-
-            </h3>
-
-            <h5 id="built-with">
-
-                Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
-
-            </h5>
-
-        </div>
-
-        <!-- <h1 id="dc-title"></h1> -->
-        <div id="info-container">
-
-            <a id="view-example" target="_blank">Click to view an example</a>
-
-            <div id="toggle-tab" class="button">View Code</div>
-
-            <div id="dc-description-container">
-                <h3><span id="pathModule"></span><span id="pathFunction"></span></h3>
-              <p><pre id="dc-description"></pre></p>
+            <div id="reset-button" class="button">
+                Reset Tree
             </div>
 
-            <div id="dc-code-container"></div>
+            <div id="refresh-button" class="button">
+                Refresh Tree
+            </div>
+
+        </div>
+        <div id="back-button-container">
+            <div id="back-button" class="nav-button">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i> <span id="back-id"></span>
+            </div>
+
+            <div id="forward-button" class="nav-button">
+                <span id="forward-id"></span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div id="tree-container"></div>
+
+        <div id="search-container">
+            <div id="search-bar-container">
+                <input id="search-bar" placeholder="Search">
+                </input>
+                <i id="search-button" class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <div id="search-instr">
+                If a hidden child-node contains the search term, its visible parent is highlighted. If this parent itself does not contain the search term, upon expanding this parent, the parent will reset to its default color.
+            </div>
+        </div>
+
+        <div id="detail-container" class="panel-resizable show-caption">
+
+            <div id="caption">
+
+                <h1>
+                    <i>Let's explore D3!</i>
+                </h1>
+
+                <hr>
+
+                <h3>
+
+                    <p>
+                        Explore the tree to the left to see what capabilities D3 has to offer. 
+                    </p>
+
+                    <p>
+                        To interact with the tree, just click to expand a node. Click the node again to shrink the node.
+                    </p>
+
+                    <p>
+                        And, to zoom in on the visualization, scroll up; to zoom out, scroll down.
+                    </p>
+
+                    <p>
+                        <i>Have fun!</i>
+                    </p>
+
+                </h3>
+
+                <h5 id="built-with">
+
+                    Built with <a href="https://d3js.org/">D3</a> (of course) and <a href="https://github.com/RodrigoSC/dndTree">dndTree</a>
+
+                </h5>
+
+            </div>
+
+            <!-- <h1 id="dc-title"></h1> -->
+            <div id="info-container">
+
+                <a id="view-example" target="_blank">Click to view an example</a>
+
+                <div id="toggle-tab" class="button">View Code</div>
+
+                <div id="dc-description-container">
+                    <h3><span id="pathModule"></span><span id="pathFunction"></span></h3>
+                  <p><pre id="dc-description"></pre></p>
+                </div>
+
+                <div id="dc-code-container"></div>
+
+            </div>
 
         </div>
 
