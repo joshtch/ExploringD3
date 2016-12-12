@@ -26,7 +26,6 @@ function configureEditor(editor) {
 		// editor.getSession().setUseWorker(false);
 		editor.$blockScrolling = Infinity;
 		editor.resize(true);
-		editor.session.setUseWrapMode(true);
 }
 
 /*
